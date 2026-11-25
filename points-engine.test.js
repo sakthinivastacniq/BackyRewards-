@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+const {score}=require('./points-engine');
+const input={days:Array.from({length:5},(_,i)=>({id:String(i),validated:true,wearHours:8,eligibleHours:8})),baseline:{validated:true,hours:40,shifts:5,rate:60,exposure:8,stress:100},current:{rate:42,exposure:5.6,stress:80},validated:true,comparable:true,quest:{validated:true,baselineRate:40,currentRate:30},streakMilestone:5,level:1};
+assert.equal(score(input).award,934);
+assert.equal(score({...input,monthEarned:4600}).award,10);
+assert.equal(score({...input,current:{rate:42,exposure:9}}).lines.frequency,0);
+assert.equal(score({...input,comparable:false}).lines.exposure,0);
+assert.equal(score({...input,baseline:{...input.baseline,rate:0}}).lines.frequency,0);
+assert.throws(()=>score({...input,days:[input.days[0],input.days[0]]}));
+console.log('SafeRewards synthetic regression tests passed');
