@@ -11,4 +11,10 @@ assert.equal(score({...input,days:input.days.map(d=>({...d,validated:"false"}))}
 assert.equal(score({...input,validated:"false"}).lines.frequency,0);
 assert.equal(score({...input,comparable:"false"}).lines.frequency,0);
 assert.equal(score({...input,days:input.days.slice(0,1)}).lines.streak,0);
+const history=Array.from({length:10},(_,i)=>({id:'shift-'+i,sequence:i+1,validated:true,qualifying:true}));
+assert.equal(score({...input,streakMilestone:10}).lines.streak,0);
+assert.equal(score({...input,streakMilestone:20}).lines.streak,0);
+assert.equal(score({...input,streakMilestone:10,streakHistory:history}).lines.streak,150);
+assert.equal(score({...input,streakMilestone:10,streakHistory:history.map((d,i)=>i===4?{...d,sequence:99}:d)}).lines.streak,0);
+assert.equal(score({...input,streakMilestone:10,streakHistory:history.map((d,i)=>i===4?{...d,id:history[0].id}:d)}).lines.streak,0);
 console.log('SafeRewards synthetic regression tests passed');
