@@ -1,0 +1,12 @@
+{
+  "name": "backy-saferewards",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node points-engine.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
