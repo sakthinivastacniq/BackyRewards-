@@ -7,4 +7,8 @@ assert.equal(score({...input,current:{rate:42,exposure:9}}).lines.frequency,0);
 assert.equal(score({...input,comparable:false}).lines.exposure,0);
 assert.equal(score({...input,baseline:{...input.baseline,rate:0}}).lines.frequency,0);
 assert.throws(()=>score({...input,days:[input.days[0],input.days[0]]}));
+assert.equal(score({...input,days:input.days.map(d=>({...d,validated:"false"}))}).award,0);
+assert.equal(score({...input,validated:"false"}).lines.frequency,0);
+assert.equal(score({...input,comparable:"false"}).lines.frequency,0);
+assert.equal(score({...input,days:input.days.slice(0,1)}).lines.streak,0);
 console.log('SafeRewards synthetic regression tests passed');
