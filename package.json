@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "test": "node points-engine.test.js"
+    "test": "node points-engine.test.js && node demo-ledger.js"
   },
   "engines": {
     "node": ">=20"
