@@ -1,23 +1,685 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Backy SafeRewards</title><style>
-*{box-sizing:border-box}body{margin:0;background:#eef3f8;color:#16243e;font:15px system-ui,sans-serif}header{background:#142442;color:white;padding:22px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px}header b{font-size:24px}small,.muted{color:#60738b}header small{color:#9cdaff}main{max-width:1200px;margin:auto;padding:24px}nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}button,select,input{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 16px;background:#e0eaf5;color:#142442;font-weight:700}button.active,.primary{background:#087eaf;color:white}button:disabled{opacity:.45;cursor:default}.hero{display:flex;justify-content:space-between;align-items:center;gap:20px;background:#142442;color:white;border-radius:24px;padding:32px}.hero img{width:150px;border-radius:24px;image-rendering:auto}.hero h1{font-size:clamp(27px,4vw,45px);margin:8px 0}.hero p{color:#b7d9f0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0}.card{background:white;border:1px solid #dce6ef;border-radius:20px;padding:22px;min-width:0}.card h2,.card h3{margin:0 0 12px}.big{font-size:34px;font-weight:800;letter-spacing:-1px}.cyan{color:#0083b5}.green{color:#087b60}.bar{height:10px;background:#e5edf5;border-radius:10px;overflow:hidden;margin:10px 0}.bar i{display:block;background:#159ed8;height:100%}.line{display:flex;justify-content:space-between;gap:15px;padding:11px 0;border-bottom:1px solid #e6edf3}section[hidden]{display:none}label{display:block;font-weight:600;margin:12px 0 5px}input[type=number],select{width:100%;padding:10px;border:1px solid #b8c9da;border-radius:9px;background:white;color:#142442}input[type=checkbox]{margin-right:8px}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:12px;text-align:left;border-bottom:1px solid #e5edf5}.scroll{overflow:auto}.badge{background:#dff1fb;color:#086b94;padding:5px 9px;border-radius:20px;font-size:12px;font-weight:bold}.voucher{background:#e2f3fb;padding:22px;border-radius:14px;margin-bottom:15px}.voucher b{font-size:26px}footer{padding:20px;text-align:center;color:#60738b}a{color:#087eaf} @media(max-width:600px){main{padding:14px}.hero{padding:20px}.hero img{width:100px}.hero h1{font-size:27px}header{padding:16px}.card{padding:16px}} .shell-card{border:1px solid #dce6ef;border-radius:14px;padding:14px}.current-shell{outline:2px solid #087eaf}.shell-preview{display:flex;align-items:center;gap:8px}.shell-preview img{border:3px solid var(--shell);border-radius:50%}.shell-preview svg{width:85px;height:40px}</style></head><body><header><b>Backy<span style="color:#48c9ff">.</span> SafeRewards</b><small> TACNIQ · TRIAL MODE</small></header><main><nav id="nav"><button data-tab="home" class="active">My Backy</button><button data-tab="quests">Safety quests</button><button data-tab="shop">Rewards</button><button data-tab="employer">Employer</button><button data-tab="engine">Points lab</button><button data-tab="providers">API providers</button><button data-tab="ledger">Points history</button></nav>
-<section id="home"><div class="hero"><div><small style="color:#8ed9ff">YOUR SAFETY COMPANION</small><h1>Backy's got your back.</h1><p>Lift right. Level up. Get rewarded.</p><button class="primary" data-go="quests">Explore my quests</button></div><img src="/mascot.svg" alt="Backy the armadillo"></div><div class="grid"><article class="card"><small>Available Spine Points</small><div class="big wallet">2,400 SP</div><p class="worth cyan">S$12.00</p><button data-go="shop">Explore rewards</button></article><article class="card"><small id="levelname">Level 2 · Spotter</small><div class="big">2,400 SP</div><div class="bar"><i id="levelbar" style="width:70%"></i></div><p id="levelnext">600 lifetime points to Lifter</p></article><article class="card"><small>Personal improvement</small><div class="big green">30% lower</div><p>HRP frequency and exposure · example</p></article><article class="card"><small>Scheduled shift streak</small><div class="big">6 shifts</div><div class="bar"><i style="width:60%"></i></div><p>4 more to +150 SP</p></article></div><article class="card"><h2>Meet your next shell</h2><label for="levelpreview">Preview mascot milestones (does not change wallet)</label><select id="levelpreview"><option value="2400">Current demo · 2,400 SP</option><option value="0">Rookie</option><option value="1000">Spotter</option><option value="3000">Lifter</option><option value="6000">Pro Lifter</option><option value="10000">Iron Spine</option></select><div class="grid" id="levels"></div></article></section>
-<section id="quests" hidden><div class="hero"><div><h1>Small moves. Big rewards.</h1><p>Every shift is a fresh start. Focus on your own progress.</p></div><img src="/mascot.svg" alt="Backy"></div><article class="card" id="personalquest" style="margin-top:20px"><span class="badge">Synthetic coaching preview</span><h2 style="margin-top:12px">Your personalised quest</h2><label for="questprofile">Example worker profile</label><select id="questprofile"><option value="0">Warehouse picker</option><option value="1">Care worker</option><option value="2">Retail stocker</option><option value="3">Baseline pending</option></select><div id="questresult" aria-live="polite"></div><p class="muted">Coaching preview only. Exposure-based progress does not automatically qualify for the existing rate-based points rule.</p></article><div class="grid" id="questcards"></div></section>
-<section id="shop" hidden><h1>Rewards marketplace</h1><p class="muted">Illustrative catalogue only. No real orders, no external funds.</p><div class="card"><small>Available balance</small><div class="big wallet"></div><p class="worth"></p><label for="country">Market</label><select id="country"><option value="SG">Singapore · SGD</option><option value="US">United States · USD</option><option value="GB">United Kingdom · GBP</option><option value="AE">UAE · AED</option><option value="IN">India · INR</option></select></div><div class="grid" id="vouchers"></div><div class="card"><h2>Demo redemption history</h2><div id="history">No rewards redeemed yet.</div><button id="reset">Reset demo wallet</button></div></section>
-<section id="employer" hidden><h1>Employer analytics</h1><p class="muted">Synthetic trial data · no client records</p><div class="grid"><div class="card"><small>Workers</small><div class="big">100</div></div><div class="card"><small>Illustrative wear compliance</small><div class="big">72%</div></div><div class="card"><small>Illustrative HRP rate improvement</small><div class="big green">30%</div></div><div class="card"><small>Illustrative exposure improvement</small><div class="big green">30%</div></div></div><div class="card"><h2>Reward budget</h2><div class="grid"><div><label>Workers</label><input id="heads" type="number" min="1" max="100000" value="100"><label>SGD per 1,000 SP</label><input id="rate" type="number" min="0" max="100" step=".5" value="5"><label>Share of cap earned (%)</label><input id="eng" type="number" min="0" max="100" value="60"><label for="fee">Estimated provider fee (%)</label><input id="fee" type="number" min="0" max="100" step=".1" value="0"></div><div><small>Expected monthly budget</small><div class="big cyan" id="budget"></div><p id="maxbudget"></p><p id="rewardcost"></p><small>Annual expected funding</small><div class="big" id="annualbudget"></div><p class="muted">4,610 SP hard cap, including multipliers. Fee is a planning assumption, not a supplier quote. Excludes taxes and fixed costs.</p></div></div></div><div class="card" style="margin-top:16px"><h2>Spine Points matrix v2.1</h2><div class="scroll"><table><thead><tr><th>Rule</th><th>Threshold</th><th>Points</th></tr></thead><tbody id="matrix"></tbody></table></div></div></section>
-<section id="engine" hidden><h1>Points engine laboratory</h1><p class="muted">Live calculation against the repository's server-side scoring function. Synthetic inputs only.</p><div class="grid"><div class="card"><h2>Baseline & current</h2><label>Baseline HRP events/hour</label><input id="br" type="number" min="0" value="60"><label>Current HRP events/hour</label><input id="cr" type="number" min="0" value="42"><label>Baseline exposure (%)</label><input id="be" type="number" min="0" max="100" step=".1" value="8"><label>Current exposure (%)</label><input id="ce" type="number" min="0" max="100" step=".1" value="5.6"><label>Baseline stress index/hour</label><input id="bs" type="number" min="0" value="100"><label>Current stress index/hour</label><input id="cs" type="number" min="0" value="80"></div><div class="card"><h2>Wear & validation</h2><label>Scheduled shifts (8h each)</label><input id="days" type="number" min="0" max="7" value="5"><label>Wear hours per shift</label><input id="wear" type="number" min="0" max="8" step=".5" value="8"><label for="goodshare">Good pick-up share of lifts (%)</label><input id="goodshare" type="number" min="0" max="100" value="78"><label>Already earned this month</label><input id="earned" type="number" min="0" value="0"><label>Level</label><select id="level"><option value="0">Rookie · 1.00×</option><option value="1" selected>Spotter · 1.05×</option><option value="2">Lifter · 1.10×</option><option value="3">Pro Lifter · 1.15×</option><option value="4">Iron Spine · 1.20×</option></select><label><input type="checkbox" id="valid" checked>Validated wearable data & baseline</label><label><input type="checkbox" id="comparable" checked>Comparable task and configuration</label><label><input type="checkbox" id="quest" checked>Validated posture quest (25% reduction)</label><label><input type="checkbox" id="streak" checked>New 5-shift milestone</label><button class="primary" id="calculate">Calculate points</button></div><div class="card"><h2>Weekly award</h2><div class="big cyan" id="award">—</div><p id="status"></p><div id="breakdown"></div><p class="muted">Pilot rules, not a clinically validated injury risk model.</p></div></div></section>
-<section id="providers" hidden><h1>Voucher integration lab</h1><p>Provider documentation and onboarding status. No credentials configured; no authenticated requests or orders in this build.</p><div class="grid" id="providerlist"></div></section><section id="ledger" hidden><h1>Your points history</h1><p class="muted">Local demo ledger. Not a financial account.</p><div class="card"><h2>Lifetime vs spendable points</h2><div class="big wallet"></div><p>2,400 lifetime SP · redemption never reduces your level.</p><div id="ledgerrows"></div></div></section></main><footer>Backy SafeRewards v0.4 · Demo only · Synthetic data · No real voucher issuance</footer><script>
-const $=id=>document.getElementById(id), num=id=>Number($(id).value), fmt=n=>n.toLocaleString('en-SG'), money=n=>'S$'+n.toFixed(2);function tab(id){document.querySelectorAll('main section').forEach(s=>s.hidden=s.id!==id);document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));}document.querySelectorAll('[data-tab],[data-go]').forEach(b=>b.onclick=()=>tab(b.dataset.tab||b.dataset.go));
-const levels=['Rookie','Spotter','Lifter','Pro Lifter','Iron Spine'], thresholds=[0,1000,3000,6000,10000], colors=['#b2bdc9','#38bdf8','#36b69b','#947de4','#e9b94e'];
-const lifetimeDemo=2400;
-function progression(points){const index=thresholds.reduce((a,t,i)=>points>=t?i:a,0);const next=thresholds[index+1];return {index,remaining:next===undefined?0:next-points,progress:next===undefined?100:Math.floor(100*(points-thresholds[index])/(next-thresholds[index]))};}
-const shellNames=['Starter shell','Wave shell','Forest shell','Amethyst shell','Golden shell'];
-function shell(i){return '<div class="shell-preview" style="--shell:'+colors[i]+'"><img src="/mascot.svg" alt="" width="76"><svg viewBox="0 0 100 40" aria-hidden="true"><path d="M8 32 Q12 2 50 2 Q88 2 92 32 L80 38 H20Z" fill="'+colors[i]+'" stroke="#142442" stroke-width="2"/>'+Array.from({length:i+2},(_,j)=>'<path d="M'+(18+j*64/(i+1))+' 12 L'+(24+j*52/(i+1))+' 34" stroke="#142442" stroke-width="2" opacity=".55"/>').join('')+'</svg></div>';}
-function renderLevels(points){const p=progression(points);$('levels').innerHTML=levels.map((n,i)=>'<div class="shell-card '+(i===p.index?'current-shell':'')+'">'+shell(i)+'<h3>'+n+'</h3><p>'+shellNames[i]+'</p><small>'+fmt(thresholds[i])+' lifetime SP · '+(1+i*.05).toFixed(2)+'×</small><p><b>'+(i===p.index?'Current level':i<p.index?'Unlocked':'Locked')+'</b></p></div>').join('');$('levelname').textContent='Level '+(p.index+1)+' · '+levels[p.index];$('levelbar').style.width=p.progress+'%';$('levelnext').textContent=p.remaining?fmt(p.remaining)+' lifetime points to '+levels[p.index+1]:'Highest level reached';}
-renderLevels(lifetimeDemo);
-$('levelpreview').onchange=()=>{renderLevels(Number($('levelpreview').value));};
-const rules=[['Suit Up','Validated wear','10/hour · max 80/day'],['Full Shift','80% eligible scheduled hours','20/day'],['Clean Lift','Good pick-ups 80%+ (70–79%) of 20+ lifts, 4h+ worn','30 (15)/day'],['Beat Your Baseline','10/20/30% HRP rate reduction','40/80/125 weekly'],['Protect Your Spine','10/20/30% exposure reduction','40/80/125 weekly'],['Backy Quest','15% assigned posture reduction','50 weekly'],['Stress Reducer','15% stress index reduction','40 weekly'],['Hot Streak','5/10/20 qualifying shifts','50/150/400'],['Squad Quest','15% team HRP reduction; exposure not worse','100 monthly']];$('matrix').innerHTML=rules.map(r=>'<tr>'+r.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('');$('questcards').innerHTML=rules.map(r=>'<article class="card"><span class="badge">Safety habit</span><h2 style="margin-top:12px">'+r[0]+'</h2><p>'+r[1]+'</p><b class="cyan">'+r[2]+' SP</b></article>').join('');
-const providers=[['Tremendous','https://developers.tremendous.com/','Sandbox catalogue /products'],['DT One','https://developers.dtone.com/','Preproduction catalogue /products'],['Virtual Incentives','https://developers.virtualincentives.com/','Development programs'],['Voucher Express','https://corporate.voucherexpress.com/page/vex-api','Technical onboarding required'],['Merit Incentives','https://apidocs.meritincentives.com/gift-cards/index.html','Sandbox account and product IDs']];$('providerlist').innerHTML=providers.map(p=>'<article class="card"><span class="badge">Not connected</span><h2 style="margin-top:12px">'+p[0]+'</h2><p>'+p[2]+'</p><a href="'+p[1]+'" target="_blank" rel="noopener">Documentation</a></article>').join('');
-let balance=2400,history=[];try{const saved=JSON.parse(localStorage.getItem('backy-demo-v03')||'null');if(saved&&Array.isArray(saved.history)&&saved.history.length<=2&&saved.history.every(x=>typeof x==='string'&&x.length<150)){history=saved.history;balance=2400-history.length*1000}}catch{}const markets={SG:['S$',5],US:['US$',5],GB:['£',5],AE:['AED ',20],IN:['₹',400]};function shop(){document.querySelectorAll('.wallet').forEach(x=>x.textContent=fmt(balance)+' SP');document.querySelectorAll('.worth').forEach(x=>x.textContent=money(balance*.005)+' · SGD reference');const [symbol,value]=markets[$('country').value];$('vouchers').innerHTML=['Groceries','Mobile top-up','Shopping','Dining','Retail'].map((n,i)=>'<article class="card"><div class="voucher"><small>Sample reward</small><br><b>'+symbol+value+'</b></div><h2>'+n+'</h2><p class="muted">'+providers[i][0]+' · availability unverified</p><button class="primary" data-redeem="'+i+'" '+(balance<1000?'disabled':'')+'>Redeem 1,000 SP</button></article>').join('');document.querySelectorAll('[data-redeem]').forEach(b=>b.onclick=()=>{if(balance<1000||!confirm('Simulate redemption of 1,000 SP? No actual voucher will be issued.'))return;balance-=1000;history.push(['Groceries','Mobile top-up','Shopping','Dining','Retail'][+b.dataset.redeem]+' · '+symbol+value+' · simulated');shop()});$('history').replaceChildren(...(history.length?history:['No rewards redeemed yet.']).map(x=>{const p=document.createElement('p');p.textContent=x;return p}));try{localStorage.setItem('backy-demo-v03',JSON.stringify({history}))}catch{};$('ledgerrows').replaceChildren(...['+2,400 SP · illustrative opening award',...history.map(x=>'−1,000 SP · '+x)].map(x=>{const p=document.createElement('p');p.className='line';p.textContent=x;return p}));}$('country').onchange=shop;$('reset').onclick=()=>{balance=2400;history=[];shop()};shop();
-function budget(){const h=num('heads'),r=num('rate'),e=num('eng'),fee=num('fee');const valid=Number.isInteger(h)&&h>=1&&h<=100000&&Number.isFinite(r)&&r>=0&&r<=100&&e>=0&&e<=100&&fee>=0&&fee<=100&&['heads','rate','eng','fee'].every(id=>$(id).value.trim()!=='');if(!valid){$('budget').textContent='Invalid inputs';$('maxbudget').textContent='Check the input ranges.';$('annualbudget').textContent='—';$('rewardcost').textContent='—';return}const face=h*r*4.61*e/100,total=face*(1+fee/100);$('budget').textContent=money(total);$('maxbudget').textContent='Maximum monthly funding: '+money(h*r*4.61*(1+fee/100));$('annualbudget').textContent=money(total*12);$('rewardcost').textContent=money(face)+' rewards + '+money(face*fee/100)+' estimated fees'}['heads','rate','eng','fee'].forEach(id=>$(id).oninput=budget);budget();
-async function calculate(){const validated=$('valid').checked,n=Math.max(0,Math.min(7,Math.floor(num('days')))),w=num('wear');if(w<0||w>8){$('status').textContent='Wear must be between 0 and 8 hours.';return}const input={days:Array.from({length:n},(_,i)=>({id:'demo-'+i,validated,wearHours:w,eligibleHours:8,goodLifts:Math.round(Math.max(0,Math.min(100,num('goodshare')))),riskyLifts:100-Math.round(Math.max(0,Math.min(100,num('goodshare'))))})),baseline:{validated,hours:40,shifts:5,rate:num('br'),exposure:num('be'),stress:num('bs')},current:{rate:num('cr'),exposure:num('ce'),stress:num('cs')},validated,comparable:$('comparable').checked,quest:$('quest').checked?{validated,baselineRate:40,currentRate:30}:null,streakMilestone:$('streak').checked&&n>=5&&w>=6.4?5:0,level:num('level'),monthEarned:num('earned')};try{const res=await fetch('/api/score',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(input)}),v=await res.json();if(!res.ok)throw Error(v.error);$('award').textContent=fmt(v.award)+' SP';$('status').textContent=v.guard?'Improvement awards eligible': 'Improvement awards withheld or pending';$('breakdown').innerHTML=Object.entries(v.lines).map(([k,x])=>'<div class="line"><span>'+k+'</span><b>+'+x+'</b></div>').join('')+'<p>Multiplier: '+v.multiplier+'× · cap applied</p>'}catch(e){$('status').textContent=e.message;$('award').textContent='—'}}$('calculate').onclick=calculate;calculate();
-</script><script>(()=>{const profiles=[{"name":"Warehouse picker","base":[6,2,1],"current":[4.8,1.8,1]},{"name":"Care worker","base":[2,5,1],"current":[2,4.5,1]},{"name":"Retail stocker","base":[1,2,4],"current":[1,2,3.4]},{"name":"Baseline pending","base":null,"current":null}],recommend=function recommend(p){if(!p.base||!p.current)return null;let i=p.base.indexOf(Math.max(...p.base));return {i,improvement:100*(p.base[i]-p.current[i])/p.base[i]}},names=['Twisting','Forward bending','Backward bending'];const select=document.getElementById('questprofile'),out=document.getElementById('questresult');function render(){const p=profiles[Number(select.value)],r=recommend(p);if(!r){out.textContent='Awaiting validated baseline. Keep wearing Backy during eligible shifts.';return;}const progress=Math.max(0,Math.min(100,r.improvement/15*100));out.innerHTML='<h3 style="margin-top:16px">Reduce '+names[r.i].toLowerCase()+' exposure</h3><p>Baseline: '+p.base[r.i]+'% of wear time · Current: '+p.current[r.i]+'%</p><div class="bar"><i style="width:'+progress+'%"></i></div><p>'+r.improvement.toFixed(1)+'% reduction · 15% coaching target</p><p>Follow your workplace safe handling procedures and ask for assistance when needed.</p>';}select.addEventListener('change',render);render();})();</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Backy SafeRewards</title>
+<style>
+* { box-sizing: border-box }
+body { margin: 0; background: #eef3f8; color: #16243e; font: 15px system-ui, sans-serif }
+header { background: #142442; color: white; padding: 22px 5%; display: flex; align-items: center; justify-content: space-between; gap: 16px }
+header b { font-size: 24px }
+small, .muted { color: #60738b }
+header small { color: #9cdaff }
+main { max-width: 1200px; margin: auto; padding: 24px }
+nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px }
+button, select, input { font: inherit }
+button { cursor: pointer; border: 0; border-radius: 12px; padding: 12px 16px; background: #e0eaf5; color: #142442; font-weight: 700 }
+button.active, .primary { background: #087eaf; color: white }
+button:disabled { opacity: .45; cursor: default }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid #087eaf; outline-offset: 2px }
+.hero { display: flex; justify-content: space-between; align-items: center; gap: 20px; background: #142442; color: white; border-radius: 24px; padding: 32px }
+.hero img { width: 150px; border-radius: 24px }
+.hero h1 { font-size: clamp(27px, 4vw, 45px); margin: 8px 0 }
+.hero p { color: #b7d9f0 }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 20px 0 }
+.card { background: white; border: 1px solid #dce6ef; border-radius: 20px; padding: 22px; min-width: 0 }
+.card h2, .card h3 { margin: 0 0 12px }
+.big { font-size: 34px; font-weight: 800; letter-spacing: -1px; font-variant-numeric: tabular-nums }
+.cyan { color: #0083b5 }
+.green { color: #087b60 }
+.red { color: #b42318 }
+.bar { height: 10px; background: #e5edf5; border-radius: 10px; overflow: hidden; margin: 10px 0 }
+.bar i { display: block; background: #159ed8; height: 100% }
+.line { display: flex; justify-content: space-between; gap: 15px; padding: 11px 0; border-bottom: 1px solid #e6edf3; margin: 0 }
+section[hidden] { display: none }
+label { display: block; font-weight: 600; margin: 12px 0 5px }
+input[type=number], select { width: 100%; padding: 10px; border: 1px solid #b8c9da; border-radius: 9px; background: white; color: #142442 }
+input[type=checkbox] { margin-right: 8px }
+table { border-collapse: collapse; width: 100%; font-size: 14px }
+td, th { padding: 12px; text-align: left; border-bottom: 1px solid #e5edf5 }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: #60738b; white-space: nowrap }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap }
+.scroll { overflow: auto }
+.badge { background: #dff1fb; color: #086b94; padding: 5px 9px; border-radius: 20px; font-size: 12px; font-weight: bold }
+.voucher { background: #e2f3fb; padding: 22px; border-radius: 14px; margin-bottom: 15px }
+.voucher b { font-size: 26px }
+.notice { background: #fff4e5; border: 1px solid #f5c98b; color: #7a4a00; border-radius: 14px; padding: 12px 16px; margin-bottom: 16px }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; background: #e5edf5; padding: 4px; border-radius: 999px; margin-bottom: 12px }
+.seg button { padding: 6px 12px; border-radius: 999px; background: transparent; font-size: 13px }
+.seg button[aria-pressed="true"] { background: white; color: #087eaf }
+.rank { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; background: #e5edf5; font-size: 13px }
+.rank.first { background: #fdf3e1; color: #b7791f }
+.stack { display: flex; height: 8px; border-radius: 9px; overflow: hidden; background: #e5edf5; min-width: 120px }
+.stack i { display: block; height: 100% }
+.key { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: #60738b; margin-top: 10px }
+.key span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; background: var(--c); vertical-align: -1px }
+dialog { border: 0; border-radius: 20px; padding: 24px; max-width: 420px; width: calc(100% - 32px); color: #16243e }
+dialog::backdrop { background: rgba(20, 36, 66, .5) }
+dialog menu { display: flex; gap: 8px; justify-content: flex-end; padding: 0; margin: 20px 0 0 }
+footer { padding: 20px; text-align: center; color: #60738b }
+a { color: #087eaf }
+.shell-card { border: 1px solid #dce6ef; border-radius: 14px; padding: 14px }
+.current-shell { outline: 2px solid #087eaf }
+.shell-preview { display: flex; align-items: center; gap: 8px }
+.shell-preview img { border: 3px solid var(--shell); border-radius: 50% }
+.shell-preview svg { width: 85px; height: 40px }
+@media (max-width: 600px) {
+  main { padding: 14px } .hero { padding: 20px } .hero img { width: 100px } .hero h1 { font-size: 27px }
+  header { padding: 16px } .card { padding: 16px }
+}
+</style>
+</head>
+<body>
+<header><b>Backy<span style="color:#48c9ff">.</span> SafeRewards</b><small>TACNIQ · TRIAL MODE</small></header>
+<main>
+<div class="notice" id="offline" hidden>The demo server isn't reachable, so the wallet, points history and leaderboard can't load. Run <code>npm start</code> and open <code>http://localhost:3000</code>.</div>
+<nav id="nav">
+  <button data-tab="home" class="active">My Backy</button>
+  <button data-tab="quests">Safety quests</button>
+  <button data-tab="shop">Rewards</button>
+  <button data-tab="board">Leaderboard</button>
+  <button data-tab="employer">Employer</button>
+  <button data-tab="engine">Points lab</button>
+  <button data-tab="providers">API providers</button>
+  <button data-tab="ledger">Points history</button>
+</nav>
+
+<section id="home">
+  <div class="hero">
+    <div>
+      <small style="color:#8ed9ff">YOUR SAFETY COMPANION</small>
+      <h1>Backy's got your back.</h1>
+      <p>Lift right. Level up. Get rewarded.</p>
+      <button class="primary" data-go="quests">Explore my quests</button>
+    </div>
+    <img src="/mascot.svg" alt="Backy the armadillo">
+  </div>
+  <div class="grid">
+    <article class="card">
+      <small>Spendable Spine Points</small>
+      <div class="big wallet">—</div>
+      <p class="worth cyan">—</p>
+      <button data-go="shop">Explore rewards</button>
+    </article>
+    <article class="card">
+      <small id="levelname">—</small>
+      <div class="big lifetime">—</div>
+      <div class="bar"><i id="levelbar" style="width:0%"></i></div>
+      <p id="levelnext">—</p>
+    </article>
+    <article class="card">
+      <small>Personal improvement</small>
+      <div class="big green">30% lower</div>
+      <p>HRP frequency and exposure · example</p>
+    </article>
+    <article class="card">
+      <small>Scheduled shift streak</small>
+      <div class="big">6 shifts</div>
+      <div class="bar"><i style="width:60%"></i></div>
+      <p>4 more to +150 SP · example</p>
+    </article>
+  </div>
+  <article class="card">
+    <h2>Meet your next shell</h2>
+    <label for="levelpreview">Preview mascot milestones (does not change your points)</label>
+    <select id="levelpreview">
+      <option value="current">My current level</option>
+      <option value="0">Rookie</option>
+      <option value="1000">Spotter</option>
+      <option value="3000">Lifter</option>
+      <option value="6000">Pro Lifter</option>
+      <option value="10000">Iron Spine</option>
+    </select>
+    <div class="grid" id="levels"></div>
+  </article>
+</section>
+
+<section id="quests" hidden>
+  <div class="hero">
+    <div>
+      <h1>Small moves. Big rewards.</h1>
+      <p>Every shift is a fresh start. Focus on your own progress.</p>
+    </div>
+    <img src="/mascot.svg" alt="Backy">
+  </div>
+  <article class="card" id="personalquest" style="margin-top:20px">
+    <span class="badge">Synthetic coaching preview</span>
+    <h2 style="margin-top:12px">Your personalised quest</h2>
+    <label for="questprofile">Example worker profile</label>
+    <select id="questprofile">
+      <option value="0">Warehouse picker</option>
+      <option value="1">Care worker</option>
+      <option value="2">Retail stocker</option>
+      <option value="3">Baseline pending</option>
+    </select>
+    <div id="questresult" aria-live="polite"></div>
+    <p class="muted">Coaching preview only. Exposure-based progress does not automatically qualify for the existing rate-based points rule.</p>
+  </article>
+  <div class="grid" id="questcards"></div>
+</section>
+
+<section id="shop" hidden>
+  <h1>Rewards marketplace</h1>
+  <p class="muted">Illustrative catalogue only. No real orders, no external funds.</p>
+  <div class="card">
+    <small>Spendable balance</small>
+    <div class="big wallet">—</div>
+    <p class="worth">—</p>
+    <label for="country">Market</label>
+    <select id="country">
+      <option value="SG">Singapore · SGD</option>
+      <option value="US">United States · USD</option>
+      <option value="GB">United Kingdom · GBP</option>
+      <option value="AE">UAE · AED</option>
+      <option value="IN">India · INR</option>
+    </select>
+  </div>
+  <div class="grid" id="vouchers"></div>
+  <div class="card">
+    <h2>Demo redemptions</h2>
+    <div id="history">No rewards redeemed yet.</div>
+    <button id="reset">Reset demo wallet</button>
+  </div>
+</section>
+
+<section id="board" hidden>
+  <h1>SafeRewards leaderboard</h1>
+  <p class="muted">Six devices from the TACNIQ DEMO org (1–11 Nov 2026), scored by the same points engine as the Points lab. Ranked by improvement on their own baseline, not by how heavy the job is.</p>
+  <div class="card">
+    <div class="seg" role="group" aria-label="Rank by">
+      <button data-sort="award" aria-pressed="true">Total SP</button>
+      <button data-sort="rateCut" aria-pressed="false">Most improved</button>
+      <button data-sort="cleanShare" aria-pressed="false">Clean Lift %</button>
+      <button data-sort="hours" aria-pressed="false">Wear time</button>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>#</th><th>Device</th><th>Points mix</th><th class="num">Risky moves / h vs baseline</th><th class="num">Good pick-ups</th><th class="num">SP</th><th class="num">Value</th></tr></thead>
+        <tbody id="lb"><tr><td colspan="7">Loading…</td></tr></tbody>
+      </table>
+    </div>
+    <div class="key">
+      <span style="--c:#159ed8">Wear &amp; full shift</span>
+      <span style="--c:#10b981">Clean Lift</span>
+      <span style="--c:#8b5cf6">Beat your baseline</span>
+      <span style="--c:#f97316">Streak, quests &amp; team</span>
+    </div>
+    <p class="muted">Posture counts and wear hours are the dashboard figures for 1–11 Nov. Personal baselines, days worn (hours ÷ 6.1), a 7.5-hour scheduled shift and a flat exposure figure are assumptions for this example, so treat the totals as a worked example rather than a payout.</p>
+  </div>
+</section>
+
+<section id="employer" hidden>
+  <h1>Employer analytics</h1>
+  <p class="muted">Synthetic trial data · no client records</p>
+  <div class="grid">
+    <div class="card"><small>Workers</small><div class="big">100</div></div>
+    <div class="card"><small>Illustrative wear compliance</small><div class="big">72%</div></div>
+    <div class="card"><small>Illustrative HRP rate improvement</small><div class="big green">30%</div></div>
+    <div class="card"><small>Illustrative exposure improvement</small><div class="big green">30%</div></div>
+  </div>
+  <div class="card">
+    <h2>Reward budget</h2>
+    <div class="grid">
+      <div>
+        <label for="currency">Funding currency</label>
+        <select id="currency">
+          <option value="SGD">SGD · Singapore dollar</option>
+          <option value="USD">USD · US dollar (Tremendous default)</option>
+        </select>
+        <label for="heads">Workers</label>
+        <input id="heads" type="number" min="1" max="100000" value="100">
+        <label for="rate" id="ratelabel">Value of 1,000 SP</label>
+        <input id="rate" type="number" min="0" max="100" step=".5" value="5">
+        <label for="eng">Share of cap earned (%)</label>
+        <input id="eng" type="number" min="0" max="100" value="60">
+        <label for="fee">Estimated provider fee (%)</label>
+        <input id="fee" type="number" min="0" max="100" step=".1" value="0">
+      </div>
+      <div>
+        <small>Expected monthly budget</small>
+        <div class="big cyan" id="budget"></div>
+        <p id="maxbudget"></p>
+        <p id="rewardcost"></p>
+        <small>Annual expected funding</small>
+        <div class="big" id="annualbudget"></div>
+        <p class="muted">4,610 SP hard cap, including multipliers. Fee is a planning assumption, not a supplier quote. Excludes taxes and fixed costs. The currency and rate set here also price the worker's wallet.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h2>Spine Points matrix v2.2</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Rule</th><th>Threshold</th><th>Points</th></tr></thead>
+        <tbody id="matrix"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="engine" hidden>
+  <h1>Points engine laboratory</h1>
+  <p class="muted">Live calculation against the repository's server-side scoring function. Synthetic inputs only. <b>Preview</b> changes nothing; <b>Add to my points</b> posts the week to your points history using your real level and what you've already earned this month.</p>
+  <div class="grid">
+    <div class="card">
+      <h2>Baseline &amp; current</h2>
+      <label for="br">Baseline HRP events/hour</label>
+      <input id="br" type="number" min="0" value="60">
+      <label for="cr">Current HRP events/hour</label>
+      <input id="cr" type="number" min="0" value="42">
+      <label for="be">Baseline exposure (%)</label>
+      <input id="be" type="number" min="0" max="100" step=".1" value="8">
+      <label for="ce">Current exposure (%)</label>
+      <input id="ce" type="number" min="0" max="100" step=".1" value="5.6">
+      <label for="bs">Baseline Back Stress Score (1–10, daily average)</label>
+      <input id="bs" type="number" min="1" max="10" step=".1" value="5">
+      <label for="cs">Current Back Stress Score (1–10, daily average)</label>
+      <input id="cs" type="number" min="1" max="10" step=".1" value="4">
+    </div>
+    <div class="card">
+      <h2>Wear &amp; validation</h2>
+      <label for="days">Scheduled shifts (8h each)</label>
+      <input id="days" type="number" min="0" max="7" value="5">
+      <label for="wear">Wear hours per shift</label>
+      <input id="wear" type="number" min="0" max="8" step=".5" value="8">
+      <label for="goodshare">Good pick-up share of lifts (%)</label>
+      <input id="goodshare" type="number" min="0" max="100" value="78">
+      <label for="earned">Already earned this month (preview only)</label>
+      <input id="earned" type="number" min="0" value="0">
+      <label for="level">Level (preview only)</label>
+      <select id="level">
+        <option value="0">Rookie · 1.00×</option>
+        <option value="1" selected>Spotter · 1.05×</option>
+        <option value="2">Lifter · 1.10×</option>
+        <option value="3">Pro Lifter · 1.15×</option>
+        <option value="4">Iron Spine · 1.20×</option>
+      </select>
+      <label><input type="checkbox" id="valid" checked>Validated wearable data &amp; baseline</label>
+      <label><input type="checkbox" id="comparable" checked>Comparable task and configuration</label>
+      <label><input type="checkbox" id="quest" checked>Validated posture quest (25% reduction)</label>
+      <label><input type="checkbox" id="streak" checked>New 5-shift milestone</label>
+      <label for="week">Week to post</label>
+      <select id="week"></select>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+        <button class="primary" id="calculate">Preview points</button>
+        <button id="post">Add to my points</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Weekly award</h2>
+      <div class="big cyan" id="award">—</div>
+      <p id="status" aria-live="polite"></p>
+      <div id="breakdown"></div>
+      <p class="muted">Pilot rules, not a clinically validated injury risk model.</p>
+    </div>
+  </div>
+</section>
+
+<section id="providers" hidden>
+  <h1>Voucher integration lab</h1>
+  <p>Provider documentation and onboarding status. No credentials configured; no authenticated requests or orders in this build.</p>
+  <div class="grid" id="providerlist"></div>
+</section>
+
+<section id="ledger" hidden>
+  <h1>Your points history</h1>
+  <p class="muted">Demo ledger held by the server (in memory, resets on restart). Not a financial account.</p>
+  <div class="card">
+    <h2>Lifetime vs spendable points</h2>
+    <div class="big wallet">—</div>
+    <p id="lifetimenote">—</p>
+    <div id="ledgerrows"></div>
+  </div>
+</section>
+</main>
+
+<dialog id="confirm" aria-labelledby="confirmtitle">
+  <h2 id="confirmtitle" style="margin-top:0">Redeem points?</h2>
+  <p id="confirmtext"></p>
+  <p class="muted">Demo only. No real voucher will be issued.</p>
+  <menu>
+    <button id="confirmno" type="button">Cancel</button>
+    <button id="confirmyes" type="button" class="primary">Redeem</button>
+  </menu>
+</dialog>
+
+<footer>Backy SafeRewards v0.5 · Policy v2.2 · Demo only · Synthetic data · No real voucher issuance</footer>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const num = (id) => Number($(id).value);
+const fmt = (n) => n.toLocaleString('en-SG');
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+// ---- client settings (Employer tab) ---------------------------------------
+const currencies = { SGD: 'S$', USD: 'US$' };
+const client = () => ({ currency: $('currency').value, perK: Math.max(0, num('rate') || 0) });
+const money = (n, cur = client().currency) => currencies[cur] + n.toFixed(2);
+const spValue = (sp) => money((sp / 1000) * client().perK);
+
+// ---- tabs -----------------------------------------------------------------
+function tab(id) {
+  document.querySelectorAll('main section').forEach((s) => (s.hidden = s.id !== id));
+  document.querySelectorAll('[data-tab]').forEach((b) => b.classList.toggle('active', b.dataset.tab === id));
+  if (id === 'board') loadBoard();
+}
+document.querySelectorAll('[data-tab],[data-go]').forEach((b) => (b.onclick = () => tab(b.dataset.tab || b.dataset.go)));
+
+// ---- API ------------------------------------------------------------------
+async function api(path, body) {
+  const res = await fetch(path, body === undefined ? {} : {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) throw Error(data.error || 'Request failed');
+  return data;
+}
+const requestId = () => 'r-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+
+// ---- levels & mascot ------------------------------------------------------
+const levels = ['Rookie', 'Spotter', 'Lifter', 'Pro Lifter', 'Iron Spine'];
+const thresholds = [0, 1000, 3000, 6000, 10000];
+const colors = ['#b2bdc9', '#38bdf8', '#36b69b', '#947de4', '#e9b94e'];
+const shellNames = ['Starter shell', 'Wave shell', 'Forest shell', 'Amethyst shell', 'Golden shell'];
+
+function progression(points) {
+  const index = thresholds.reduce((a, t, i) => (points >= t ? i : a), 0);
+  const next = thresholds[index + 1];
+  return {
+    index,
+    remaining: next === undefined ? 0 : next - points,
+    progress: next === undefined ? 100 : Math.floor((100 * (points - thresholds[index])) / (next - thresholds[index])),
+  };
+}
+function shell(i) {
+  const ridges = Array.from({ length: i + 2 }, (_, j) =>
+    '<path d="M' + (18 + (j * 64) / (i + 1)) + ' 12 L' + (24 + (j * 52) / (i + 1)) + ' 34" stroke="#142442" stroke-width="2" opacity=".55"/>').join('');
+  return '<div class="shell-preview" style="--shell:' + colors[i] + '"><img src="/mascot.svg" alt="" width="76">' +
+    '<svg viewBox="0 0 100 40" aria-hidden="true"><path d="M8 32 Q12 2 50 2 Q88 2 92 32 L80 38 H20Z" fill="' + colors[i] +
+    '" stroke="#142442" stroke-width="2"/>' + ridges + '</svg></div>';
+}
+function renderShells(points) {
+  const p = progression(points);
+  $('levels').innerHTML = levels.map((n, i) =>
+    '<div class="shell-card ' + (i === p.index ? 'current-shell' : '') + '">' + shell(i) + '<h3>' + n + '</h3><p>' + shellNames[i] +
+    '</p><small>' + fmt(thresholds[i]) + ' lifetime SP · ' + (1 + i * 0.05).toFixed(2) + '×</small><p><b>' +
+    (i === p.index ? 'Current level' : i < p.index ? 'Unlocked' : 'Locked') + '</b></p></div>').join('');
+}
+function renderLevel(lifetime) {
+  const p = progression(lifetime);
+  $('levelname').textContent = 'Level ' + (p.index + 1) + ' · ' + levels[p.index];
+  $('levelbar').style.width = p.progress + '%';
+  $('levelnext').textContent = p.remaining ? fmt(p.remaining) + ' lifetime points to ' + levels[p.index + 1] : 'Highest level reached';
+}
+$('levelpreview').onchange = () => {
+  const v = $('levelpreview').value;
+  renderShells(v === 'current' ? (wallet ? wallet.lifetime : 0) : Number(v));
+};
+
+// ---- matrix & quest cards -------------------------------------------------
+const rules = [
+  ['Suit Up', 'Validated wear', '10/hour · max 80/day'],
+  ['Full Shift', '80% of scheduled hours worn', '20/day'],
+  ['Clean Lift', 'Good pick-ups 80%+ (70–79%) of 20+ lifts, 4h+ worn', '30 (15)/day'],
+  ['Beat Your Baseline', '10/20/30% HRP rate reduction', '40/80/125 weekly'],
+  ['Protect Your Spine', '10/20/30% exposure reduction', '40/80/125 weekly'],
+  ['Backy Quest', '15% assigned posture reduction', '50 weekly'],
+  ['Stress Reducer', 'Average daily Back Stress Score (1–10) 15% below baseline', '40 weekly'],
+  ['Hot Streak', '5/10/20 qualifying shifts', '50/150/400'],
+  ['Squad Quest', 'Team of 3+: HRP rate 15% lower vs last month, exposure no worse', '100 monthly'],
+];
+$('matrix').innerHTML = rules.map((r) => '<tr>' + r.map((x) => '<td>' + x + '</td>').join('') + '</tr>').join('');
+$('questcards').innerHTML = rules.map((r) =>
+  '<article class="card"><span class="badge">Safety habit</span><h2 style="margin-top:12px">' + r[0] + '</h2><p>' + r[1] +
+  '</p><b class="cyan">' + r[2] + ' SP</b></article>').join('');
+
+const providers = [
+  ['Tremendous', 'https://developers.tremendous.com/', 'Sandbox catalogue /products'],
+  ['DT One', 'https://developers.dtone.com/', 'Preproduction catalogue /products'],
+  ['Virtual Incentives', 'https://developers.virtualincentives.com/', 'Development programs'],
+  ['Voucher Express', 'https://corporate.voucherexpress.com/page/vex-api', 'Technical onboarding required'],
+  ['Merit Incentives', 'https://apidocs.meritincentives.com/gift-cards/index.html', 'Sandbox account and product IDs'],
+];
+$('providerlist').innerHTML = providers.map((p) =>
+  '<article class="card"><span class="badge">Not connected</span><h2 style="margin-top:12px">' + p[0] + '</h2><p>' + p[2] +
+  '</p><a href="' + p[1] + '" target="_blank" rel="noopener">Documentation</a></article>').join('');
+
+// ---- wallet (server ledger) -----------------------------------------------
+let wallet = null;
+const markets = { SG: ['S$', 5], US: ['US$', 5], GB: ['£', 5], AE: ['AED ', 20], IN: ['₹', 400] };
+const rewardNames = ['Groceries', 'Mobile top-up', 'Shopping', 'Dining', 'Retail'];
+const REDEEM_SP = 1000;
+
+function rows(target, items, className) {
+  $(target).replaceChildren(...items.map((x) => {
+    const p = document.createElement('p');
+    if (className) p.className = className;
+    p.textContent = x;
+    return p;
+  }));
+}
+function renderWallet() {
+  const w = wallet;
+  document.querySelectorAll('.wallet').forEach((x) => (x.textContent = w ? fmt(w.spendable) + ' SP' : '—'));
+  document.querySelectorAll('.worth').forEach((x) => (x.textContent = w ? 'Worth ' + spValue(w.spendable) + ' at the client rate' : '—'));
+  document.querySelectorAll('.lifetime').forEach((x) => (x.textContent = w ? fmt(w.lifetime) + ' SP' : '—'));
+  if (!w) return;
+  renderLevel(w.lifetime);
+  if ($('levelpreview').value === 'current') renderShells(w.lifetime);
+  $('lifetimenote').textContent = fmt(w.lifetime) + ' lifetime SP · ' + fmt(w.monthly) + ' earned this month (' +
+    fmt(w.remaining) + ' left under the 4,610 SP cap) · redeeming never lowers your level.';
+  const [symbol, value] = markets[$('country').value];
+  $('vouchers').innerHTML = rewardNames.map((n, i) =>
+    '<article class="card"><div class="voucher"><small>Sample reward</small><br><b>' + symbol + value + '</b></div><h2>' + n +
+    '</h2><p class="muted">' + providers[i][0] + ' · availability unverified</p><button class="primary" data-redeem="' + i + '" ' +
+    (w.spendable < REDEEM_SP ? 'disabled' : '') + '>Redeem ' + fmt(REDEEM_SP) + ' SP</button></article>').join('');
+  document.querySelectorAll('[data-redeem]').forEach((b) => (b.onclick = () => askRedeem(+b.dataset.redeem)));
+  const spent = w.statement.filter((x) => x.type === 'redeem');
+  rows('history', spent.length ? spent.map((x) => '−' + fmt(x.points) + ' SP · ' + x.label) : ['No rewards redeemed yet.']);
+  rows('ledgerrows', w.statement.map((x) => x.type === 'award'
+    ? '+' + fmt(x.awarded) + ' SP · ' + (x.assessment === 'opening-award' ? 'Illustrative opening award' : 'Weekly award · ' + x.assessment) +
+      (x.awarded < x.requested ? ' (cap reached: ' + fmt(x.requested) + ' scored)' : '')
+    : '−' + fmt(x.points) + ' SP · ' + x.label), 'line');
+}
+async function loadWallet() {
+  try {
+    wallet = await api('/api/wallet');
+    $('offline').hidden = true;
+  } catch {
+    wallet = null;
+    $('offline').hidden = false;
+  }
+  renderWallet();
+}
+
+// In-page confirm step (window.confirm is blocked in some embedded views).
+let pending = null;
+function askRedeem(i) {
+  const [symbol, value] = markets[$('country').value];
+  pending = { request: requestId(), points: REDEEM_SP, label: rewardNames[i] + ' · ' + symbol + value + ' · simulated' };
+  $('confirmtext').textContent = 'Spend ' + fmt(REDEEM_SP) + ' SP on a ' + rewardNames[i] + ' reward (' + symbol + value + ')?';
+  $('confirm').showModal();
+}
+$('confirmno').onclick = () => { pending = null; $('confirm').close(); };
+$('confirmyes').onclick = async () => {
+  const req = pending;
+  $('confirm').close();
+  if (!req) return;
+  try {
+    wallet = (await api('/api/redeem', req)).wallet;
+  } catch (e) {
+    alertBox(e.message);
+  }
+  pending = null;
+  renderWallet();
+};
+function alertBox(msg) {
+  $('history').prepend(Object.assign(document.createElement('p'), { className: 'red', textContent: msg }));
+}
+$('country').onchange = renderWallet;
+$('reset').onclick = async () => {
+  try { wallet = await api('/api/reset', {}); } catch {}
+  renderWallet();
+};
+
+// ---- employer budget ------------------------------------------------------
+function budget() {
+  const h = num('heads'), r = num('rate'), e = num('eng'), fee = num('fee');
+  $('ratelabel').textContent = client().currency + ' per 1,000 SP';
+  const valid = Number.isInteger(h) && h >= 1 && h <= 100000 && Number.isFinite(r) && r >= 0 && r <= 100 &&
+    e >= 0 && e <= 100 && fee >= 0 && fee <= 100 && ['heads', 'rate', 'eng', 'fee'].every((id) => $(id).value.trim() !== '');
+  if (!valid) {
+    $('budget').textContent = 'Invalid inputs';
+    $('maxbudget').textContent = 'Check the input ranges.';
+    $('annualbudget').textContent = '—';
+    $('rewardcost').textContent = '—';
+    return;
+  }
+  const face = (h * r * 4.61 * e) / 100, total = face * (1 + fee / 100);
+  $('budget').textContent = money(total);
+  $('maxbudget').textContent = 'Maximum monthly funding: ' + money(h * r * 4.61 * (1 + fee / 100));
+  $('annualbudget').textContent = money(total * 12);
+  $('rewardcost').textContent = money(face) + ' rewards + ' + money((face * fee) / 100) + ' estimated fees';
+  renderWallet();
+  if (board) renderBoard();
+}
+['heads', 'rate', 'eng', 'fee', 'currency'].forEach((id) => ($(id).oninput = budget));
+
+// ---- points lab -----------------------------------------------------------
+['week-45', 'week-46', 'week-47', 'week-48'].forEach((w) =>
+  $('week').append(new Option('Week ' + w.slice(5) + ' · Nov 2026', w)));
+$('week').value = 'week-48';
+
+function labInput() {
+  const validated = $('valid').checked, n = Math.max(0, Math.min(7, Math.floor(num('days')))), w = num('wear');
+  if (!(w >= 0 && w <= 8)) throw Error('Wear must be between 0 and 8 hours.');
+  const good = Math.round(Math.max(0, Math.min(100, num('goodshare'))));
+  return {
+    days: Array.from({ length: n }, (_, i) => ({
+      id: 'demo-' + i, validated, wearHours: w, eligibleHours: 8, goodLifts: good, riskyLifts: 100 - good,
+    })),
+    baseline: { validated, hours: 40, shifts: 5, rate: num('br'), exposure: num('be'), stress: num('bs') },
+    current: { rate: num('cr'), exposure: num('ce'), stress: num('cs') },
+    validated,
+    comparable: $('comparable').checked,
+    quest: $('quest').checked ? { validated, baselineRate: 40, currentRate: 30 } : null,
+    streakMilestone: $('streak').checked && n >= 5 && w >= 6.4 ? 5 : 0,
+    level: num('level'),
+    monthEarned: num('earned'),
+  };
+}
+const labels = {
+  wear: 'Suit Up', fullShift: 'Full Shift', cleanLift: 'Clean Lift', frequency: 'Beat Your Baseline',
+  exposure: 'Protect Your Spine', quest: 'Backy Quest', stress: 'Stress Reducer', streak: 'Hot Streak', team: 'Squad Quest',
+};
+function showResult(v, note) {
+  $('award').textContent = fmt(v.award) + ' SP';
+  $('status').textContent = note || (v.guard ? 'Improvement awards eligible' : 'Improvement awards withheld or pending');
+  $('breakdown').innerHTML = Object.entries(v.lines).map(([k, x]) =>
+    '<div class="line"><span>' + (labels[k] || k) + '</span><b>+' + x + '</b></div>').join('') +
+    '<p>Multiplier: ' + v.multiplier + '× · cap applied · worth ' + spValue(v.award) + '</p>';
+}
+async function calculate() {
+  try {
+    showResult(await api('/api/score', labInput()));
+  } catch (e) {
+    $('status').textContent = e.message;
+    $('award').textContent = '—';
+  }
+}
+async function post() {
+  try {
+    const r = await api('/api/award', { assessment: $('week').value, input: labInput() });
+    wallet = r.wallet;
+    renderWallet();
+    showResult(r.result, r.entry.duplicate
+      ? 'Already posted for this week. Nothing added.'
+      : 'Posted ' + fmt(r.entry.awarded) + ' SP to your points history' +
+        (r.entry.awarded < r.entry.requested ? ' (monthly cap reached)' : '') + '.');
+  } catch (e) {
+    $('status').textContent = e.message;
+  }
+}
+$('calculate').onclick = calculate;
+$('post').onclick = post;
+
+// ---- leaderboard ----------------------------------------------------------
+let board = null, sortKey = 'award';
+async function loadBoard() {
+  if (board) return renderBoard();
+  try {
+    board = await api('/api/leaderboard');
+    renderBoard();
+  } catch {
+    $('lb').innerHTML = '<tr><td colspan="7">Leaderboard needs the demo server.</td></tr>';
+  }
+}
+function renderBoard() {
+  const sorted = [...board].sort((a, b) => (b[sortKey] ?? -Infinity) - (a[sortKey] ?? -Infinity));
+  const max = Math.max(...board.map((x) => x.award));
+  const pct = (v) => ((v / max) * 100).toFixed(1) + '%';
+  $('lb').innerHTML = sorted.map((s, i) => {
+    const l = s.lines;
+    const parts = [
+      [l.wear + l.fullShift, '#159ed8'], [l.cleanLift, '#10b981'],
+      [l.frequency + l.exposure + l.stress, '#8b5cf6'], [l.quest + l.streak + l.team, '#f97316'],
+    ];
+    const down = s.rateCut >= 0;
+    return '<tr><td><span class="rank ' + (i === 0 ? 'first' : '') + '">' + (i + 1) + '</span></td>' +
+      '<td><b>' + esc(s.id) + '</b><br><small>' + esc(s.dept) + ' · ' + s.hours + 'h · ' + s.daysWorn + ' days</small></td>' +
+      '<td><div class="stack">' + parts.map(([v, c]) => '<i style="width:' + pct(v) + ';background:' + c + '"></i>').join('') + '</div></td>' +
+      '<td class="num"><b class="' + (down ? 'green' : 'red') + '">' + (down ? '↓ ' : '↑ ') + Math.abs(Math.round(s.rateCut)) + '%</b><br><small>' +
+      s.riskyPerHour + ' vs ' + s.baselinePerHour + '</small></td>' +
+      '<td class="num">' + Math.round(s.cleanShare * 100) + '%</td>' +
+      '<td class="num"><b>' + fmt(s.award) + '</b></td>' +
+      '<td class="num">' + spValue(s.award) + '</td></tr>';
+  }).join('');
+}
+document.querySelectorAll('[data-sort]').forEach((b) => (b.onclick = () => {
+  sortKey = b.dataset.sort;
+  document.querySelectorAll('[data-sort]').forEach((x) => x.setAttribute('aria-pressed', x === b));
+  renderBoard();
+}));
+
+// ---- start ----------------------------------------------------------------
+renderShells(0);
+budget();
+loadWallet();
+calculate();
+// Deep links such as /#board open that tab.
+const startTab = location.hash.slice(1);
+if (document.querySelector('[data-tab="' + CSS.escape(startTab) + '"]')) tab(startTab);
+</script>
+<script>
+(() => {
+  const profiles = [
+    { name: 'Warehouse picker', base: [6, 2, 1], current: [4.8, 1.8, 1] },
+    { name: 'Care worker', base: [2, 5, 1], current: [2, 4.5, 1] },
+    { name: 'Retail stocker', base: [1, 2, 4], current: [1, 2, 3.4] },
+    { name: 'Baseline pending', base: null, current: null },
+  ];
+  const names = ['Twisting', 'Forward bending', 'Backward bending'];
+  function recommend(p) {
+    if (!p.base || !p.current) return null;
+    const i = p.base.indexOf(Math.max(...p.base));
+    return { i, improvement: (100 * (p.base[i] - p.current[i])) / p.base[i] };
+  }
+  const select = document.getElementById('questprofile'), out = document.getElementById('questresult');
+  function render() {
+    const p = profiles[Number(select.value)], r = recommend(p);
+    if (!r) {
+      out.textContent = 'Awaiting validated baseline. Keep wearing Backy during eligible shifts.';
+      return;
+    }
+    const progress = Math.max(0, Math.min(100, (r.improvement / 15) * 100));
+    out.innerHTML = '<h3 style="margin-top:16px">Reduce ' + names[r.i].toLowerCase() + ' exposure</h3><p>Baseline: ' + p.base[r.i] +
+      '% of wear time · Current: ' + p.current[r.i] + '%</p><div class="bar"><i style="width:' + progress + '%"></i></div><p>' +
+      r.improvement.toFixed(1) + '% reduction · 15% coaching target</p><p>Follow your workplace safe handling procedures and ask for assistance when needed.</p>';
+  }
+  select.addEventListener('change', render);
+  render();
+})();
+</script>
+</body>
+</html>
