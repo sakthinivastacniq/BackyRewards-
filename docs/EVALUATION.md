@@ -19,6 +19,23 @@ This reviews the repository as of commit `9c7cede` (20 commits, 25–26 Nov 2026
 2. **Clean Lift rule (policy v2.1).** It rewards a high share of good pick-ups, a signal every Backy dashboard already shows. Nine new tests. Awards for inputs without lift counts are unchanged.
 3. **Docs.** README, a methodology that links each rule to a dashboard metric, this evaluation, and provider notes from the Tremendous and DT One calls.
 
+## Second revamp (v0.5, policy v2.2)
+
+| # | Gap from the list below | Status |
+|---|---|---|
+| 1 | Stress signal doesn't match the dashboard | **Fixed.** The engine reads the average daily Back Stress Score (1–10) and ignores anything outside that range. The lab fields are relabelled. 9 new tests |
+| 3 | Ledger isn't connected | **Fixed for the demo.** The server holds one ledger. The lab's *Add to my points* posts a week, and the wallet, level, rewards and points history all read from it. Redemptions are in the ledger and idempotent. It's still in memory with no login, so it isn't ready for real money |
+| 4 | Currency and fees | **Partly fixed.** The Employer tab has a funding currency (SGD or USD), and that currency and rate also price the wallet and leaderboard. Singapore funding fees from Tremendous still need confirming |
+| 5 | Who confirms the Squad Quest | **Fixed.** `teamQualifies()` in the engine: 3+ workers, HRP rate 15% lower, exposure no worse. 11 new tests |
+| 7 | `window.confirm` | **Fixed.** Redemption uses an in-page dialog |
+| 8 | No CI | **Fixed.** GitHub Actions runs `npm test` on Node 20 and 22. `.gitattributes` keeps line endings LF |
+
+Also new: a **Leaderboard** tab from the v1 concept demo. It shows the six TACNIQ DEMO devices scored by the real engine and can be ranked by total, most improved, Clean Lift share or wear time. `server.test.js` covers the API end to end.
+
+Found and fixed while testing: re-sending a week after a level-up was scored with the new boost and rejected as a conflict. Each week is now scored once.
+
+Still open: 2 (no source for scheduled hours), 6 (level boost on wear points), and 9–13.
+
 ## Gaps and risks, in priority order
 
 ### Fix before a real pilot

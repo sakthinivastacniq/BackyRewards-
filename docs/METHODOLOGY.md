@@ -1,4 +1,4 @@
-# SafeRewards methodology (policy v2.1)
+# SafeRewards methodology (policy v2.2)
 
 This document combines two strands of work: the points engine built in this repo (v2) and the SafeRewards design worked out from the live Backy dashboard and partner calls (v1 concept, November 2026). Where they differed, the choice made here is stated.
 
@@ -25,12 +25,12 @@ Get more frontline workers to wear Backy every shift, and reward them for actual
 | `days[].goodLifts` / `riskyLifts` | Good Pick-up vs Forward Bend + Backward Bend + Twisting counts | Used by Clean Lift (v2.1) |
 | `baseline.rate` / `current.rate` | High-risk events per worn hour | Overview: High-risk events ÷ wear time |
 | `baseline.exposure` / `current.exposure` | Daily Events, Exposure view (% of time in high-risk posture) | |
-| `baseline.stress` / `current.stress` | Back Stress Score (1–10 per day, lower is better) | **Change needed:** the engine labels this "stress index per hour". Use the average daily Back Stress Score over worn days (4h+) |
+| `baseline.stress` / `current.stress` | Back Stress Score (1–10 per day, lower is better) | **Done in v2.2:** both are the average daily score. Values outside 1–10 are ignored. If `current.stress` is left out, the engine averages `days[].backStressScore` over validated days worn 4h+ |
 | Streak history | Days worn (4h+) on consecutive scheduled shifts | |
-| Team quest | Department filter, high-risk events per hour | Team qualification is decided outside the engine (`teamQualified`) |
+| `team` | Department filter: high-risk events per hour and exposure, this month vs last | **Done in v2.2:** `teamQualifies()` checks it in the engine. Needs a validated summary of 3+ workers. The old `teamQualified` flag still works when no `team` is sent |
 | Baseline | First 5+ validated shifts and 20+ worn hours | Matches `policy.baselineShifts` / `baselineHours` |
 
-## 4. Spine Points matrix v2.1
+## 4. Spine Points matrix v2.2
 
 | # | Rule | Threshold | Points | Period |
 |---|---|---|---|---|
@@ -40,9 +40,11 @@ Get more frontline workers to wear Backy every shift, and reward them for actual
 | 4 | Beat Your Baseline | HRP rate 10 / 20 / 30% below baseline | 40 / 80 / 125 | Weekly |
 | 5 | Protect Your Spine | Exposure 10 / 20 / 30% below baseline | 40 / 80 / 125 | Weekly |
 | 6 | Backy Quest | Assigned posture 15% below its baseline | 50 | Weekly |
-| 7 | Stress Reducer | Back stress 15% below baseline | 40 | Weekly |
+| 7 | Stress Reducer | Average daily Back Stress Score (1–10) 15% below baseline | 40 | Weekly |
 | 8 | Hot Streak | 5 / 10 / 20 consecutive qualifying shifts | 50 / 150 / 400 | Per milestone |
-| 9 | Squad Quest | Team HRP rate 15% lower and exposure no worse | 100 | Monthly |
+| 9 | Squad Quest | Team of 3+: HRP rate 15% lower than last month and exposure no worse | 100 | Monthly |
+
+**What changed in v2.2:** no point values changed. The stress inputs now use the dashboard's Back Stress Score scale, and the Squad Quest is checked inside the engine instead of being passed in as a yes/no flag.
 
 **What changed from v2:** v2.1 adds **Clean Lift** from the v1 concept. Every Backy dashboard already shows good pick-up counts, and Clean Lift rewards good technique on the day it happens. A worker doesn't have to wait a week for an improvement bonus. Rules 4–7 are paid only when both the HRP rate and exposure are no worse than baseline, so a worker can't game one figure by worsening the other.
 
@@ -65,7 +67,10 @@ Get more frontline workers to wear Backy every shift, and reward them for actual
 - **When improvement points pay:** only with a validated baseline of 20+ hours and 5+ shifts, 12+ worn hours and 3+ full shifts this week, a comparable task setup, and exposure readings between 0 and 100%.
 - **Clean Lift:** needs at least 20 lifts and 4 hours worn in the shift.
 - **Streaks of 10 and 20:** need an unbroken, validated sequence of unique shifts.
-- **Squad Quest:** never pays to a worker with zero wear that week.
+- **Stress:** scores outside 1–10 (for example the old "index per hour" figures) are ignored, so they can't earn Stress Reducer.
+- **Squad Quest:** needs a validated team summary of at least 3 workers, and never pays to a worker with zero wear that week.
+- **Server-side level and cap (demo server):** when a week is posted, the level boost and the month-to-date total come from the ledger. A request can't claim a higher level or a fresh cap. Each week is scored once.
+- **Redemptions:** spend only what's spendable, need at least 200 SP, and can't go through twice. Lifetime points, and so the level, never go down.
 - **Cap:** the monthly cap applies after the level boost. The ledger refuses to pay the same assessment twice and refuses a conflicting resubmission.
 
 ## 6. Money
