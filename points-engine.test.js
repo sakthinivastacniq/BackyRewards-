@@ -1,5 +1,5 @@
 const assert = require("node:assert/strict");
-const { score } = require("./points-engine");
+const { score, averageStress, teamQualifies, levelFor, policy } = require("./points-engine");
 const input = {
   days: Array.from({ length: 5 }, (_, i) => ({
     id: String(i),
@@ -7,8 +7,8 @@ const input = {
     wearHours: 8,
     eligibleHours: 8,
   })),
-  baseline: { validated: true, hours: 40, shifts: 5, rate: 60, exposure: 8, stress: 100 },
-  current: { rate: 42, exposure: 5.6, stress: 80 },
+  baseline: { validated: true, hours: 40, shifts: 5, rate: 60, exposure: 8, stress: 5 },
+  current: { rate: 42, exposure: 5.6, stress: 4 },
   validated: true,
   comparable: true,
   quest: { validated: true, baselineRate: 40, currentRate: 30 },
@@ -71,5 +71,43 @@ assert.equal(score(lifts(80, 20, { wearHours: 3 })).lines.cleanLift, 0); // unde
 assert.equal(score(lifts(80, 20, { validated: false })).lines.cleanLift, 0);
 assert.equal(score(lifts(-5, 30)).lines.cleanLift, 0);
 assert.equal(score({ ...lifts(85, 15), monthEarned: 4600 }).award, 10); // still capped
+
+// v2.2 Back Stress Score (daily 1-10, lower is better)
+assert.equal(policy.version, "2.2");
+assert.equal(score(input).lines.stress, 40); // 5 -> 4 is a 20% cut
+assert.equal(score({ ...input, current: { ...input.current, stress: 4.5 } }).lines.stress, 0); // 10% cut
+assert.equal(score({ ...input, baseline: { ...input.baseline, stress: 100 } }).lines.stress, 0); // old index scale rejected
+assert.equal(score({ ...input, current: { ...input.current, stress: 0 } }).lines.stress, 0); // below 1 rejected
+assert.equal(score({ ...input, current: { ...input.current, stress: 11 } }).lines.stress, 0);
+const stressDays = (scores) =>
+  input.days.map((d, i) => ({ ...d, backStressScore: scores[i] }));
+assert.equal(averageStress(stressDays([4, 4, 4, 4, 4])), 4);
+assert.equal(averageStress(stressDays([4, 4, 4, 4, 40])), 4); // out-of-range day ignored
+assert.equal(averageStress([{ id: "x", validated: true, wearHours: 3, backStressScore: 2 }]), null); // under 4h worn
+assert.equal(averageStress([{ id: "x", validated: false, wearHours: 8, backStressScore: 2 }]), null);
+assert.equal(averageStress([]), null);
+const { stress: _omit, ...currentNoStress } = input.current;
+assert.equal(score({ ...input, days: stressDays([4, 4, 4, 4, 4]), current: currentNoStress }).lines.stress, 40); // averaged from days
+assert.equal(score({ ...input, days: stressDays([5, 5, 5, 5, 5]), current: currentNoStress }).lines.stress, 0);
+assert.equal(score({ ...input, current: currentNoStress }).lines.stress, 0); // no daily scores, no award
+
+// v2.2 Squad Quest computed by the engine
+const team = { validated: true, workers: 6, baseline: { rate: 20, exposure: 6 }, current: { rate: 17, exposure: 6 } };
+assert.equal(teamQualifies(team), true); // exactly 15% lower, exposure equal
+assert.equal(teamQualifies({ ...team, current: { rate: 17.2, exposure: 6 } }), false); // 14% lower
+assert.equal(teamQualifies({ ...team, current: { rate: 10, exposure: 6.1 } }), false); // exposure worse
+assert.equal(teamQualifies({ ...team, workers: 2 }), false); // team too small
+assert.equal(teamQualifies({ ...team, workers: 3.5 }), false);
+assert.equal(teamQualifies({ ...team, validated: "true" }), false);
+assert.equal(teamQualifies({ ...team, baseline: { rate: 0, exposure: 6 } }), false);
+assert.equal(teamQualifies(null), false);
+assert.equal(score({ ...input, team }).lines.team, 100);
+assert.equal(score({ ...input, team: { ...team, workers: 1 }, teamQualified: true }).lines.team, 0); // team summary wins over the flag
+assert.equal(score({ ...input, team, days: [] }).lines.team, 0); // still needs wear
+
+// Levels from lifetime points
+assert.deepEqual([0, 999, 1000, 2999, 3000, 6000, 9999, 10000, 50000].map(levelFor), [0, 0, 1, 1, 2, 3, 3, 4, 4]);
+assert.equal(levelFor(-1), 0);
+assert.equal(levelFor(NaN), 0);
 
 console.log("SafeRewards synthetic regression tests passed");
