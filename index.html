@@ -68,6 +68,49 @@ a { color: #087eaf }
   main { padding: 14px } .hero { padding: 20px } .hero img { width: 100px } .hero h1 { font-size: 27px }
   header { padding: 16px } .card { padding: 16px }
 }
+
+/* SafeRewards visual refresh: shell-first identity, compact dashboard and worker phone */
+body{background:linear-gradient(135deg,#f7fbff,#e5eff8);font-family:Inter,system-ui,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#10233d;padding:16px 26px;box-shadow:0 4px 18px #10233d20}
+main{max-width:1600px;margin-left:218px;padding:26px}
+nav#nav{position:fixed;top:76px;bottom:0;left:0;width:218px;background:#10233d;padding:22px 12px;display:flex;flex-direction:column;flex-wrap:nowrap;gap:7px;z-index:4;margin:0}
+nav#nav button{background:transparent;color:#b8cce2;text-align:left;border-radius:10px;padding:13px 14px}
+nav#nav button.active{background:linear-gradient(110deg,#168fc3,#204e79);color:white;box-shadow:0 3px 14px #1499d333}
+.card{border-radius:16px;box-shadow:0 4px 14px #173c6410;padding:18px}
+.hero{background:linear-gradient(120deg,#fff,#dceef9);color:#10233d;padding:24px;border:1px solid #d3e4f2;border-radius:18px}
+.hero p{color:#48647d}.hero small{color:#087eaf!important}.hero h1{font-size:clamp(25px,3vw,38px)}
+.hero img{display:none}.hero .brand-shell{width:115px;flex-shrink:0}
+.overview-layout{display:grid;grid-template-columns:minmax(0,1fr) 335px;gap:20px;align-items:start;margin-top:18px}
+.overview-main{min-width:0}.overview-main .grid{margin:14px 0;gap:10px}
+#home .metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+#home .metrics .big{font-size:clamp(22px,2vw,31px)}
+#home .metrics p{font-size:12px;margin:7px 0}
+#levels{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.shell-card{padding:10px;text-align:center;min-width:0;background:#f4f8fc}
+.shell-card h3{font-size:13px;margin:4px 0}.shell-card p{font-size:11px;margin:5px 0}.shell-card small{font-size:10px}
+.shell-preview{display:block}.shell-preview svg{width:100%;height:75px}
+.phone{border:7px solid #10233d;border-radius:36px;background:#f3f8fd;padding:15px 12px 12px;box-shadow:0 12px 28px #152b4940;position:sticky;top:88px;min-width:0}
+.phone-notch{width:82px;height:15px;border-radius:20px;background:#10233d;margin:0 auto 14px}
+.phone h2{font-size:19px;margin:8px 0}.phone h3{font-size:14px;margin:0 0 8px}
+.phone-card{background:white;border:1px solid #dce7f1;border-radius:15px;padding:12px;margin:10px 0;box-shadow:0 3px 9px #173c6409}
+.phone .big{font-size:28px}.phone .mini{display:grid;grid-template-columns:1fr 1fr;gap:8px}.phone .mini .phone-card{margin:0}
+.phone button{font-size:12px;padding:10px 8px}.phone .primary{background:linear-gradient(110deg,#22a9d8,#075f98)}
+.phone .phone-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:10px}
+.phone .phone-nav button{background:#e5eef7;padding:9px 2px}.phone .phone-nav button[aria-pressed=true]{background:#126f9e;color:white}
+.phone .phone-screen[hidden]{display:none}.phone .reward-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.phone .reward-grid button{background:#e8f3fa;min-height:52px}.phone .full{width:100%;margin-top:8px}
+.shell-meter{display:grid;grid-template-columns:108px minmax(0,1fr);align-items:center;gap:10px}
+.shell-meter svg{width:108px;height:108px}.shell-meter small{display:block}
+.earn-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.earn-tile{background:#edf6fc;padding:12px;border-radius:12px;min-height:94px;font-size:12px}.earn-tile:nth-child(3n+2){background:#e9f7f2}.earn-tile:nth-child(3n){background:#f0edfc}
+.earn-tile strong{display:block;font-size:13px;margin-bottom:5px}.earn-tile b{display:block;color:#087eaf;margin-top:7px}
+.score-track{display:flex;gap:3px;margin:10px 0}.score-track i{height:9px;flex:1;border-radius:3px;background:#e0e8f0}.score-track i.good{background:#0ca77a}.score-track i.medium{background:#e6a13b}.score-track i.high{background:#dd6262}
+.streak-dots{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;margin:9px 0}.streak-dots span{border-radius:6px;background:#e8eff6;text-align:center;padding:5px 0;font-size:10px}.streak-dots .done{background:#f28a36;color:white}
+.phone .line{font-size:12px;padding:9px 0}.phone a{font-size:11px}
+@media(max-width:1250px){main{margin-left:184px;padding:18px}nav#nav{width:184px}.overview-layout{grid-template-columns:minmax(0,1fr) 305px}#levels{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1000px){.overview-layout{grid-template-columns:1fr}.phone{position:static;max-width:390px;width:100%;margin:0 auto}#levels{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:700px){header{position:static;padding:14px}header b{font-size:19px}main{margin:0;padding:12px}nav#nav{position:static;width:auto;flex-direction:row;overflow:auto;padding:8px;border-radius:12px;margin-bottom:12px}nav#nav button{white-space:nowrap;font-size:12px;padding:10px}.hero{padding:16px}.hero .brand-shell{width:75px}#home .metrics,.earn-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#levels{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:no-preference){.shell-preview svg,.shell-meter svg{transition:transform .3s ease}.shell-card:hover svg{transform:translateY(-3px)}}
 </style>
 </head>
 <body>
@@ -86,55 +129,21 @@ a { color: #087eaf }
 </nav>
 
 <section id="home">
-  <div class="hero">
-    <div>
-      <small style="color:#8ed9ff">YOUR SAFETY COMPANION</small>
-      <h1>Backy's got your back.</h1>
-      <p>Lift right. Level up. Get rewarded.</p>
-      <button class="primary" data-go="quests">Explore my quests</button>
-    </div>
-    <img src="/mascot.svg" alt="Backy the armadillo">
-  </div>
-  <div class="grid">
-    <article class="card">
-      <small>Spendable Spine Points</small>
-      <div class="big wallet">—</div>
-      <p class="worth cyan">—</p>
-      <button data-go="shop">Explore rewards</button>
-    </article>
-    <article class="card">
-      <small id="levelname">—</small>
-      <div class="big lifetime">—</div>
-      <div class="bar"><i id="levelbar" style="width:0%"></i></div>
-      <p id="levelnext">—</p>
-    </article>
-    <article class="card">
-      <small>Personal improvement</small>
-      <div class="big green">30% lower</div>
-      <p>HRP frequency and exposure · example</p>
-    </article>
-    <article class="card">
-      <small>Scheduled shift streak</small>
-      <div class="big">6 shifts</div>
-      <div class="bar"><i style="width:60%"></i></div>
-      <p>4 more to +150 SP · example</p>
-    </article>
-  </div>
-  <article class="card">
-    <h2>Meet your next shell</h2>
-    <label for="levelpreview">Preview mascot milestones (does not change your points)</label>
-    <select id="levelpreview">
-      <option value="current">My current level</option>
-      <option value="0">Rookie</option>
-      <option value="1000">Spotter</option>
-      <option value="3000">Lifter</option>
-      <option value="6000">Pro Lifter</option>
-      <option value="10000">Iron Spine</option>
-    </select>
-    <div class="grid" id="levels"></div>
-  </article>
-</section>
-
+<div class="hero"><div><small>SAFETY CULTURE · BACKY SAFEREWARDS</small><h1>Lift right. Level up. Get rewarded.</h1><p>Build safe habits, grow your shell and unlock meaningful rewards.</p><button class="primary" data-go="engine">Try the points engine</button></div><div class="brand-shell" id="brandShell"></div></div>
+<div class="overview-layout"><div class="overview-main">
+<article class="card"><h2>The Backy Spine Journey</h2><p class="muted">Five stages of stronger armour and a gradually more upright silhouette. Lifetime points unlock progress; this is a game metaphor, not a posture diagnosis.</p><label for="levelpreview">Preview a shell stage</label><select id="levelpreview"><option value="current">My current level</option><option value="0">Rookie</option><option value="1000">Spotter</option><option value="3000">Lifter</option><option value="6000">Pro Lifter</option><option value="10000">Iron Spine · Samurai</option></select><div class="grid" id="levels"></div></article>
+<div class="grid metrics"><article class="card"><small>Spendable Spine Points</small><div class="big wallet">—</div><p class="worth">—</p></article><article class="card"><small>Lifetime Spine Points</small><div class="big lifetime">—</div><p id="levelname">—</p><div class="bar"><i id="levelbar"></i></div><p id="levelnext">—</p></article><article class="card"><small>Back Stress Score · sample</small><div class="big green">2.6 / 10</div><p>Baseline 3.4 · 24% lower</p></article><article class="card"><small>Wear time · sample</small><div class="big">37h</div><p>Illustrative worker week</p></article><article class="card"><small>HRP rate · sample</small><div class="big green">30% ↓</div><p>Against personal baseline</p></article><article class="card"><small>Current streak · sample</small><div class="big">6 shifts</div><p>4 more to next milestone</p></article></div>
+<article class="card"><h2>Earn Spine Points</h2><p class="muted">Nine rules. Positive rewards only. Validated data required.</p><div id="homeRules" class="earn-grid"></div><button data-go="quests">Explore safety quests →</button></article>
+<article class="card" style="margin-top:14px"><h2>Team progress</h2><p class="muted">Illustrative team totals. Individual rankings are reserved for the synthetic demonstration tab.</p><div class="line"><span>Warehouse team · wear adoption</span><b>72%</b></div><div class="bar"><i style="width:72%"></i></div><div class="line"><span>Operations team · HRP reduction</span><b class="green">24% ↓</b></div><div class="bar"><i style="width:24%"></i></div><button data-go="board">View demo leaderboard →</button></article>
+</div><aside class="phone" aria-label="Interactive worker phone preview"><div class="phone-notch"></div><small>BACKY · MY REWARDS <span style="float:right">DEMO</span></small><h2>Hi, Courier A!</h2>
+<div id="phone-home" class="phone-screen"><div class="phone-card"><div class="shell-meter"><div id="phoneShell"></div><div><small>My Spine Points</small><div class="big wallet">—</div><small class="worth">—</small><b id="phoneLevel">—</b></div></div><div class="bar"><i id="phoneBar"></i></div><small id="phoneNext">—</small></div>
+<div class="mini"><div class="phone-card"><h3>Back Stress Score</h3><div class="big green">2.6</div><small>24% below baseline*</small><div class="score-track" aria-hidden="true"><i class="good"></i><i class="good"></i><i class="good"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><button data-phone="stress">See score →</button></div><div class="phone-card"><h3>Hot streak</h3><div class="big">6</div><small>shifts · +150 SP at 10</small><div class="streak-dots"><span class="done">1</span><span class="done">2</span><span class="done">3</span><span class="done">4</span><span class="done">5</span><span class="done">6</span><span class="">7</span><span class="">8</span><span class="">9</span><span class="">10</span></div></div></div>
+<div class="phone-card"><h3>This week's quests</h3><div class="line"><span>Reduce risky posture</span><b>125 SP</b></div><div class="line"><span>Reduce exposure</span><b>125 SP</b></div><div class="line"><span>Stress Reducer</span><b>40 SP</b></div><small>Illustrative targets, not awarded points.</small><button class="full" data-phone="quests">View quests</button></div><button class="primary full" data-phone="rewards">Redeem rewards →</button></div>
+<div id="phone-stress" class="phone-screen" hidden><div class="phone-card"><h3>Your Back Stress Score</h3><div class="big green">2.6 / 10</div><small>Illustrative daily average · baseline 3.4</small><svg viewBox="0 0 250 85" width="100%" role="img" aria-label="Illustrative stress trend decreasing from 3.4 to 2.6"><path d="M10 10H240M10 40H240M10 70H240" stroke="#dce7f1" fill="none"/><path d="M10 24 L48 32 L86 28 L124 49 L162 43 L200 57 L240 60" stroke="#0ca77a" stroke-width="3" fill="none"/></svg><p>Lower is better. Stress Reducer earns 40 SP weekly when the score improves at least 15% and both HRP metrics do not worsen, subject to validation.</p><button data-go="engine">Open points calculator →</button></div></div>
+<div id="phone-quests" class="phone-screen" hidden><div class="phone-card"><h3>My safety quests</h3><div id="phoneRules"></div><button class="full" data-go="quests">Personalised coaching →</button></div></div>
+<div id="phone-rewards" class="phone-screen" hidden><div class="phone-card"><h3>Reward wallet</h3><div class="big wallet">—</div><small class="worth">—</small><div id="phoneRewards" class="reward-grid"></div><p class="muted">Sample rewards only. No actual voucher is issued.</p><button class="full" data-go="shop">Full marketplace →</button></div><div class="phone-card"><h3>Reward providers</h3><div id="phoneProviders"></div><small>Documentation only · not connected</small></div></div>
+<div id="phone-history" class="phone-screen" hidden><div class="phone-card"><h3>My points history</h3><div id="phoneHistory"></div><button data-go="ledger">Full statement →</button></div></div>
+<div class="phone-nav"><button data-phone="home" aria-pressed="true">Home</button><button data-phone="quests" aria-pressed="false">Quests</button><button data-phone="rewards" aria-pressed="false">Rewards</button><button data-phone="history" aria-pressed="false">History</button></div><p class="muted" style="font-size:10px">*Synthetic worker analytics. No medical or injury-risk claim.</p></aside></div></section>
 <section id="quests" hidden>
   <div class="hero">
     <div>
@@ -344,7 +353,7 @@ a { color: #087eaf }
   </menu>
 </dialog>
 
-<footer>Backy SafeRewards v0.5 · Policy v2.2 · Demo only · Synthetic data · No real voucher issuance</footer>
+<footer>Backy SafeRewards v0.6 · Policy v2.2 · Demo only · Synthetic data · No real voucher issuance</footer>
 
 <script>
 const $ = (id) => document.getElementById(id);
@@ -380,8 +389,8 @@ const requestId = () => 'r-' + Date.now().toString(36) + '-' + Math.random().toS
 // ---- levels & mascot ------------------------------------------------------
 const levels = ['Rookie', 'Spotter', 'Lifter', 'Pro Lifter', 'Iron Spine'];
 const thresholds = [0, 1000, 3000, 6000, 10000];
-const colors = ['#b2bdc9', '#38bdf8', '#36b69b', '#947de4', '#e9b94e'];
-const shellNames = ['Starter shell', 'Wave shell', 'Forest shell', 'Amethyst shell', 'Golden shell'];
+const colors = ['#8295aa', '#32addb', '#187fae', '#526d86', '#c6a15a'];
+const shellNames = ['Curved shell', 'Aligned shell', 'Reinforced shell', 'Steel shell', 'Samurai steel'];
 
 function progression(points) {
   const index = thresholds.reduce((a, t, i) => (points >= t ? i : a), 0);
@@ -392,13 +401,21 @@ function progression(points) {
     progress: next === undefined ? 100 : Math.floor((100 * (points - thresholds[index])) / (next - thresholds[index])),
   };
 }
-function shell(i) {
-  const ridges = Array.from({ length: i + 2 }, (_, j) =>
-    '<path d="M' + (18 + (j * 64) / (i + 1)) + ' 12 L' + (24 + (j * 52) / (i + 1)) + ' 34" stroke="#142442" stroke-width="2" opacity=".55"/>').join('');
-  return '<div class="shell-preview" style="--shell:' + colors[i] + '"><img src="/mascot.svg" alt="" width="76">' +
-    '<svg viewBox="0 0 100 40" aria-hidden="true"><path d="M8 32 Q12 2 50 2 Q88 2 92 32 L80 38 H20Z" fill="' + colors[i] +
-    '" stroke="#142442" stroke-width="2"/>' + ridges + '</svg></div>';
+// Original parametric shell emblem. Six protective plates echo Backy's sensor pads.
+// The silhouette progressively rotates into a more upright stance.
+function emblem(i, progress=100, ring=false) {
+  const p=Math.max(0,Math.min(100,progress)), stage=Math.max(0,Math.min(4,i)), bend=stage*12+p/100*8;
+  const color=colors[stage], plates=Array.from({length:6},(_,j)=>{
+    const angle=-110+j*23, filled=Math.max(0,Math.min(1,p/100*6-j));
+    return '<g transform="rotate('+angle+' 60 65)"><path d="M54 18 Q60 15 66 18 L74 49 Q60 44 46 49Z" fill="'+(filled>0?color:'#d9e4ed')+'" stroke="#173651" stroke-width="'+(stage>=3?2:1.2)+'"/><path d="M55 22 L64 22 L69 40" fill="none" stroke="#fff" opacity=".65" stroke-width="2"/></g>';
+  }).join('');
+  return '<svg viewBox="0 0 124 124" role="img" aria-label="'+levels[stage]+' shell, '+p+' percent to next level">'+
+    (ring?'<circle cx="62" cy="62" r="58" fill="none" stroke="#e0eaf2" stroke-width="5"/><circle cx="62" cy="62" r="58" fill="none" stroke="'+color+'" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="'+p+' 100" transform="rotate(-90 62 62)"/>':'')+
+    '<g transform="rotate('+(-bend)+' 60 65)"><path d="M34 92 Q13 79 18 56 Q22 29 48 22 Q73 18 92 46 L83 66 Q68 56 57 69 Q48 84 75 99 Q48 106 34 92Z" fill="#173651"/>'+plates+
+    '<path d="M77 46 L81 34 L87 47 Q98 50 105 62 L87 61 L77 55Z" fill="#173651"/><circle cx="88" cy="50" r="1.8" fill="#fff"/><path d="M38 78 Q29 89 16 86 L30 96 L49 93" fill="#173651"/>'+
+    (stage===4?'<path d="M77 43 Q69 36 66 26 Q80 37 84 39 Q89 27 98 23 Q94 37 87 45" fill="none" stroke="#c6a15a" stroke-width="3" stroke-linecap="round"/>':'')+'</g></svg>';
 }
+function shell(i){return '<div class="shell-preview">'+emblem(i)+'</div>';}
 function renderShells(points) {
   const p = progression(points);
   $('levels').innerHTML = levels.map((n, i) =>
@@ -411,6 +428,7 @@ function renderLevel(lifetime) {
   $('levelname').textContent = 'Level ' + (p.index + 1) + ' · ' + levels[p.index];
   $('levelbar').style.width = p.progress + '%';
   $('levelnext').textContent = p.remaining ? fmt(p.remaining) + ' lifetime points to ' + levels[p.index + 1] : 'Highest level reached';
+  $('phoneShell').innerHTML=emblem(p.index,p.progress,true); $('phoneLevel').textContent=levels[p.index]; $('phoneBar').style.width=p.progress+'%'; $('phoneNext').textContent=$('levelnext').textContent; $('brandShell').innerHTML=emblem(p.index,100);
 }
 $('levelpreview').onchange = () => {
   const v = $('levelpreview').value;
@@ -475,6 +493,9 @@ function renderWallet() {
     '</h2><p class="muted">' + providers[i][0] + ' · availability unverified</p><button class="primary" data-redeem="' + i + '" ' +
     (w.spendable < REDEEM_SP ? 'disabled' : '') + '>Redeem ' + fmt(REDEEM_SP) + ' SP</button></article>').join('');
   document.querySelectorAll('[data-redeem]').forEach((b) => (b.onclick = () => askRedeem(+b.dataset.redeem)));
+  $('phoneRewards').innerHTML=rewardNames.map((n,i)=>'<button data-phone-redeem="'+i+'" '+(w.spendable<REDEEM_SP?'disabled':'')+'>'+n+'<br>'+fmt(REDEEM_SP)+' SP</button>').join('');
+  document.querySelectorAll('[data-phone-redeem]').forEach(b=>b.onclick=()=>askRedeem(+b.dataset.phoneRedeem));
+  rows('phoneHistory',w.statement.slice(-5).reverse().map(x=>x.type==='award'?'+'+fmt(x.awarded)+' SP · '+x.assessment:'−'+fmt(x.points)+' SP · '+x.label),'line');
   const spent = w.statement.filter((x) => x.type === 'redeem');
   rows('history', spent.length ? spent.map((x) => '−' + fmt(x.points) + ' SP · ' + x.label) : ['No rewards redeemed yet.']);
   rows('ledgerrows', w.statement.map((x) => x.type === 'award'
@@ -642,6 +663,17 @@ document.querySelectorAll('[data-sort]').forEach((b) => (b.onclick = () => {
   renderBoard();
 }));
 
+// ---- interactive phone and overview --------------------------------------
+document.querySelectorAll('[data-phone]').forEach(b=>b.onclick=()=>{
+  const view=b.dataset.phone;
+  document.querySelectorAll('.phone-screen').forEach(s=>s.hidden=s.id!=='phone-'+view);
+  document.querySelectorAll('.phone-nav [data-phone]').forEach(n=>n.setAttribute('aria-pressed',String(n.dataset.phone===view)));
+});
+$('homeRules').innerHTML=rules.map(r=>'<div class="earn-tile"><strong>'+r[0]+'</strong>'+r[1]+'<b>'+r[2]+' SP</b></div>').join('');
+$('phoneRules').innerHTML=rules.map(r=>'<div class="line"><span>'+r[0]+'</span><b>'+r[2]+' SP</b></div>').join('');
+$('phoneProviders').innerHTML=providers.map(p=>'<p><a href="'+p[1]+'" target="_blank" rel="noopener noreferrer">'+p[0]+' ↗</a></p>').join('');
+$('brandShell').innerHTML=emblem(1,100);
+$('phoneShell').innerHTML=emblem(0,0,true);
 // ---- start ----------------------------------------------------------------
 renderShells(0);
 budget();
