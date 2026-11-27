@@ -111,10 +111,20 @@ nav#nav button.active{background:linear-gradient(110deg,#168fc3,#204e79);color:w
 @media(max-width:1000px){.overview-layout{grid-template-columns:1fr}.phone{position:static;max-width:390px;width:100%;margin:0 auto}#levels{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media(max-width:700px){header{position:static;padding:14px}header b{font-size:19px}main{margin:0;padding:12px}nav#nav{position:static;width:auto;flex-direction:row;overflow:auto;padding:8px;border-radius:12px;margin-bottom:12px}nav#nav button{white-space:nowrap;font-size:12px;padding:10px}.hero{padding:16px}.hero .brand-shell{width:75px}#home .metrics,.earn-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#levels{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(prefers-reduced-motion:no-preference){.shell-preview svg,.shell-meter svg{transition:transform .3s ease}.shell-card:hover svg{transform:translateY(-3px)}}
+
+.brand-lockup{display:flex;align-items:center;gap:8px}.brand-lockup svg{width:42px;height:42px;display:block}.brand-lockup svg g>path{stroke:#9bdcfb;stroke-width:1}
+.journey{background:radial-gradient(ellipse at 50% 0,#0b3655 0,#05223a 52%,#041b30 100%);color:#f5faff;border-color:#145374;padding:18px;box-shadow:0 8px 24px #09284235}
+.journey .muted,.journey label{color:#c2dbea}.journey select{background:#0d304b;color:#f5faff;border-color:#34637c}.journey #levels{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.journey .shell-card{background:linear-gradient(180deg,#0a2b45,#061e34);border:1px solid #1b5578;color:#fff;padding:7px 3px 10px;border-radius:14px;overflow:hidden}
+.journey .shell-card.current-shell{outline:2px solid #21cbff;box-shadow:0 0 16px #21cbff55}.journey .shell-card:last-child{border-color:#c5a04c}.journey .shell-card:last-child h3{color:#ffdf88}
+.journey .shell-card small{color:#bed7e8;display:block;font-size:10px;line-height:1.4}.journey .shell-card p{font-size:10px;color:#c2dbea}.journey .shell-card h3{font-size:clamp(12px,1.2vw,17px);margin:7px 0}
+.journey-art{width:100%;aspect-ratio:100/90;background-image:url('data:image/webp;base64,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');background-repeat:no-repeat;background-size:500% 100%;background-position:var(--sprite) center;border-radius:8px}
+@media(max-width:1250px){.journey #levels{grid-template-columns:repeat(5,minmax(104px,1fr));overflow-x:auto;padding:3px}}
+@media(max-width:700px){.journey #levels{grid-template-columns:repeat(5,minmax(112px,1fr))}}
 </style>
 </head>
 <body>
-<header><b>Backy<span style="color:#48c9ff">.</span> SafeRewards</b><small>TACNIQ · TRIAL MODE</small></header>
+<header><b class="brand-lockup"><span id="headerEmblem" aria-hidden="true"></span>Backy<span style="color:#48c9ff">.</span> SafeRewards</b><small>TACNIQ · TRIAL MODE</small></header>
 <main>
 <div class="notice" id="offline" hidden>The demo server isn't reachable, so the wallet, points history and leaderboard can't load. Run <code>npm start</code> and open <code>http://localhost:3000</code>.</div>
 <nav id="nav">
@@ -131,7 +141,7 @@ nav#nav button.active{background:linear-gradient(110deg,#168fc3,#204e79);color:w
 <section id="home">
 <div class="hero"><div><small>SAFETY CULTURE · BACKY SAFEREWARDS</small><h1>Lift right. Level up. Get rewarded.</h1><p>Build safe habits, grow your shell and unlock meaningful rewards.</p><button class="primary" data-go="engine">Try the points engine</button></div><div class="brand-shell" id="brandShell"></div></div>
 <div class="overview-layout"><div class="overview-main">
-<article class="card"><h2>The Backy Spine Journey</h2><p class="muted">Five stages of stronger armour and a gradually more upright silhouette. Lifetime points unlock progress; this is a game metaphor, not a posture diagnosis.</p><label for="levelpreview">Preview a shell stage</label><select id="levelpreview"><option value="current">My current level</option><option value="0">Rookie</option><option value="1000">Spotter</option><option value="3000">Lifter</option><option value="6000">Pro Lifter</option><option value="10000">Iron Spine · Samurai</option></select><div class="grid" id="levels"></div></article>
+<article class="card journey"><h2>The Backy Spine Journey</h2><p class="muted">Five milestones. Build safe habits, accumulate lifetime Spine Points and unlock your next Backy character. Progress is a game reward, not a medical assessment.</p><label for="levelpreview">Preview a milestone</label><select id="levelpreview"><option value="current">My current level</option><option value="0">Rookie</option><option value="1000">Spotter</option><option value="3000">Lifter</option><option value="6000">Pro Lifter</option><option value="10000">Iron Spine</option></select><div class="grid" id="levels"></div></article>
 <div class="grid metrics"><article class="card"><small>Spendable Spine Points</small><div class="big wallet">—</div><p class="worth">—</p></article><article class="card"><small>Lifetime Spine Points</small><div class="big lifetime">—</div><p id="levelname">—</p><div class="bar"><i id="levelbar"></i></div><p id="levelnext">—</p></article><article class="card"><small>Back Stress Score · sample</small><div class="big green">2.6 / 10</div><p>Baseline 3.4 · 24% lower</p></article><article class="card"><small>Wear time · sample</small><div class="big">37h</div><p>Illustrative worker week</p></article><article class="card"><small>HRP rate · sample</small><div class="big green">30% ↓</div><p>Against personal baseline</p></article><article class="card"><small>Current streak · sample</small><div class="big">6 shifts</div><p>4 more to next milestone</p></article></div>
 <article class="card"><h2>Earn Spine Points</h2><p class="muted">Nine rules. Positive rewards only. Validated data required.</p><div id="homeRules" class="earn-grid"></div><button data-go="quests">Explore safety quests →</button></article>
 <article class="card" style="margin-top:14px"><h2>Team progress</h2><p class="muted">Illustrative team totals. Individual rankings are reserved for the synthetic demonstration tab.</p><div class="line"><span>Warehouse team · wear adoption</span><b>72%</b></div><div class="bar"><i style="width:72%"></i></div><div class="line"><span>Operations team · HRP reduction</span><b class="green">24% ↓</b></div><div class="bar"><i style="width:24%"></i></div><button data-go="board">View demo leaderboard →</button></article>
@@ -353,7 +363,7 @@ nav#nav button.active{background:linear-gradient(110deg,#168fc3,#204e79);color:w
   </menu>
 </dialog>
 
-<footer>Backy SafeRewards v0.6 · Policy v2.2 · Demo only · Synthetic data · No real voucher issuance</footer>
+<footer>Backy SafeRewards v0.8 · Policy v2.2 · Demo only · Synthetic data · No real voucher issuance</footer>
 
 <script>
 const $ = (id) => document.getElementById(id);
@@ -390,7 +400,7 @@ const requestId = () => 'r-' + Date.now().toString(36) + '-' + Math.random().toS
 const levels = ['Rookie', 'Spotter', 'Lifter', 'Pro Lifter', 'Iron Spine'];
 const thresholds = [0, 1000, 3000, 6000, 10000];
 const colors = ['#8295aa', '#32addb', '#187fae', '#526d86', '#c6a15a'];
-const shellNames = ['Curved shell', 'Aligned shell', 'Reinforced shell', 'Steel shell', 'Samurai steel'];
+const poseNames = ['Lifting a box','Walking','Giving a thumbs-up','Lifting a barbell','Jumping for joy'];
 
 function progression(points) {
   const index = thresholds.reduce((a, t, i) => (points >= t ? i : a), 0);
@@ -403,11 +413,13 @@ function progression(points) {
 }
 // Original parametric shell emblem. Six protective plates echo Backy's sensor pads.
 // The silhouette progressively rotates into a more upright stance.
+function blendHex(a,b,t){const n=s=>[1,3,5].map(i=>parseInt(s.slice(i,i+2),16));const x=n(a),y=n(b);return '#'+x.map((v,i)=>Math.round(v+(y[i]-v)*t).toString(16).padStart(2,'0')).join('');}
 function emblem(i, progress=100, ring=false) {
-  const p=Math.max(0,Math.min(100,progress)), stage=Math.max(0,Math.min(4,i)), bend=stage*12+p/100*8;
+  const p=Math.max(0,Math.min(100,progress)), stage=Math.max(0,Math.min(4,i)), bend=0;
   const color=colors[stage], plates=Array.from({length:6},(_,j)=>{
     const angle=-110+j*23, filled=Math.max(0,Math.min(1,p/100*6-j));
-    return '<g transform="rotate('+angle+' 60 65)"><path d="M54 18 Q60 15 66 18 L74 49 Q60 44 46 49Z" fill="'+(filled>0?color:'#d9e4ed')+'" stroke="#173651" stroke-width="'+(stage>=3?2:1.2)+'"/><path d="M55 22 L64 22 L69 40" fill="none" stroke="#fff" opacity=".65" stroke-width="2"/></g>';
+    const fill=ring?(filled===1?color:filled===0?'#d9e4ed':blendHex('#d9e4ed',color,filled)):color;
+    return '<g transform="rotate('+angle+' 60 65)"><path d="M54 18 Q60 15 66 18 L74 49 Q60 44 46 49Z" fill="'+fill+'" stroke="#173651" stroke-width="'+(stage>=3?2:1.2)+'"/><path d="M55 22 L64 22 L69 40" fill="none" stroke="#fff" opacity=".65" stroke-width="2"/></g>';
   }).join('');
   return '<svg viewBox="0 0 124 124" role="img" aria-label="'+levels[stage]+' shell, '+p+' percent to next level">'+
     (ring?'<circle cx="62" cy="62" r="58" fill="none" stroke="#e0eaf2" stroke-width="5"/><circle cx="62" cy="62" r="58" fill="none" stroke="'+color+'" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="'+p+' 100" transform="rotate(-90 62 62)"/>':'')+
@@ -415,12 +427,11 @@ function emblem(i, progress=100, ring=false) {
     '<path d="M77 46 L81 34 L87 47 Q98 50 105 62 L87 61 L77 55Z" fill="#173651"/><circle cx="88" cy="50" r="1.8" fill="#fff"/><path d="M38 78 Q29 89 16 86 L30 96 L49 93" fill="#173651"/>'+
     (stage===4?'<path d="M77 43 Q69 36 66 26 Q80 37 84 39 Q89 27 98 23 Q94 37 87 45" fill="none" stroke="#c6a15a" stroke-width="3" stroke-linecap="round"/>':'')+'</g></svg>';
 }
-function shell(i){return '<div class="shell-preview">'+emblem(i)+'</div>';}
+function shell(i){return '<div class="journey-art" role="img" aria-label="'+poseNames[i]+'" style="--sprite:'+i*25+'%"></div>';}
 function renderShells(points) {
   const p = progression(points);
   $('levels').innerHTML = levels.map((n, i) =>
-    '<div class="shell-card ' + (i === p.index ? 'current-shell' : '') + '">' + shell(i) + '<h3>' + n + '</h3><p>' + shellNames[i] +
-    '</p><small>' + fmt(thresholds[i]) + ' lifetime SP · ' + (1 + i * 0.05).toFixed(2) + '×</small><p><b>' +
+    '<div class="shell-card ' + (i === p.index ? 'current-shell' : '') + '">' + shell(i) + '<h3>' + n + '</h3><small>' + fmt(thresholds[i]) + ' lifetime SP · ' + (1 + i * 0.05).toFixed(2) + '×</small><p><b>' +
     (i === p.index ? 'Current level' : i < p.index ? 'Unlocked' : 'Locked') + '</b></p></div>').join('');
 }
 function renderLevel(lifetime) {
@@ -428,7 +439,7 @@ function renderLevel(lifetime) {
   $('levelname').textContent = 'Level ' + (p.index + 1) + ' · ' + levels[p.index];
   $('levelbar').style.width = p.progress + '%';
   $('levelnext').textContent = p.remaining ? fmt(p.remaining) + ' lifetime points to ' + levels[p.index + 1] : 'Highest level reached';
-  $('phoneShell').innerHTML=emblem(p.index,p.progress,true); $('phoneLevel').textContent=levels[p.index]; $('phoneBar').style.width=p.progress+'%'; $('phoneNext').textContent=$('levelnext').textContent; $('brandShell').innerHTML=emblem(p.index,100);
+  $('phoneShell').innerHTML=emblem(p.index,p.progress,true); $('phoneLevel').textContent=levels[p.index]; $('phoneBar').style.width=p.progress+'%'; $('phoneNext').textContent=$('levelnext').textContent; $('brandShell').innerHTML=emblem(1,100);
 }
 $('levelpreview').onchange = () => {
   const v = $('levelpreview').value;
@@ -673,6 +684,7 @@ $('homeRules').innerHTML=rules.map(r=>'<div class="earn-tile"><strong>'+r[0]+'</
 $('phoneRules').innerHTML=rules.map(r=>'<div class="line"><span>'+r[0]+'</span><b>'+r[2]+' SP</b></div>').join('');
 $('phoneProviders').innerHTML=providers.map(p=>'<p><a href="'+p[1]+'" target="_blank" rel="noopener noreferrer">'+p[0]+' ↗</a></p>').join('');
 $('brandShell').innerHTML=emblem(1,100);
+$('headerEmblem').innerHTML=emblem(1,100);
 $('phoneShell').innerHTML=emblem(0,0,true);
 // ---- start ----------------------------------------------------------------
 renderShells(0);
