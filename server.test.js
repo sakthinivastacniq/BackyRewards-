@@ -68,6 +68,16 @@ const week = (overrides = {}) => ({
     r = await call("/api/reset", {});
     assert.equal(r.data.spendable, OPENING_AWARD);
 
+    // Catalogue uses synthetic fallback with no credentials; never issues orders.
+    r = await call("/api/catalogue?country=SG");
+    assert.equal(r.status, 200);
+    assert.equal(r.data.purchases, false);
+    assert.equal(r.data.mode, "sandbox-read-only");
+    assert.equal(r.data.country, "SG");
+    assert.ok(Array.isArray(r.data.products));
+    r = await call("/api/catalogue?country=INVALID");
+    assert.equal(r.status, 400);
+
     // Leaderboard is scored by the engine.
     r = await call("/api/leaderboard");
     assert.equal(r.data.length, 6);
