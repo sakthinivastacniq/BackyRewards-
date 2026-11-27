@@ -143,7 +143,7 @@ body{background:radial-gradient(ellipse at 100% 0,#a9d9f3 0,transparent 35%),lin
 .home-progress{background:#edf6fd;border-radius:14px;padding:12px;align-self:start}.home-progress h3{font-size:14px}.home-progress svg{width:100%;max-height:124px}.home-progress .big{font-size:23px}
 @media(max-width:1250px){.home-board-grid{grid-template-columns:1fr}.home-progress{max-width:100%}.home-progress svg{width:100px;float:left;margin-right:12px}.home-progress:after{content:"";display:block;clear:both}}
 @media(max-width:700px){.hero .brand-shell{width:64px}.hero{gap:9px}.journey #levels{grid-template-columns:repeat(5,minmax(125px,1fr))}}
-</style>
+.market-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}.reward-card{min-width:0;background:white;border:1px solid #dce7f1;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:7px;box-shadow:0 3px 12px #173c640c}.reward-logo{height:88px;display:flex;align-items:center;justify-content:center;text-align:center;color:#164d76;font-size:21px;overflow:hidden}.reward-logo img{max-width:100%;max-height:100%;object-fit:contain}.reward-point{align-self:flex-start;background:#e5f4fc;color:#087eaf;border-radius:20px;padding:5px 9px;font-weight:700}.reward-card button{margin-top:auto;font-size:12px}.phone .reward-card{padding:8px;font-size:11px}.phone .reward-logo{height:55px;font-size:15px}.phone .reward-card button{font-size:10px;padding:8px 4px}.phone .reward-grid{gap:8px}#vouchers{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}</style>
 </head>
 <body>
 <header><b class="brand-lockup"><span id="headerEmblem" aria-hidden="true"></span>Backy<span style="color:#48c9ff">.</span> SafeRewards</b><small>TACNIQ · TRIAL MODE</small></header>
@@ -173,7 +173,7 @@ body{background:radial-gradient(ellipse at 100% 0,#a9d9f3 0,transparent 35%),lin
 <div class="phone-card"><h3>This week's quests</h3><div class="line"><span>Reduce risky posture</span><b>125 SP</b></div><div class="line"><span>Reduce exposure</span><b>125 SP</b></div><div class="line"><span>Stress Reducer</span><b>40 SP</b></div><small>Illustrative targets, not awarded points.</small><button class="full" data-phone="quests">View quests</button></div><button class="primary full" data-phone="rewards">Redeem rewards →</button></div>
 <div id="phone-stress" class="phone-screen" hidden><div class="phone-card"><h3>Your Back Stress Score</h3><div class="big green">2.6 / 10</div><small>Illustrative daily average · baseline 3.4</small><svg viewBox="0 0 250 85" width="100%" role="img" aria-label="Illustrative stress trend decreasing from 3.4 to 2.6"><path d="M10 10H240M10 40H240M10 70H240" stroke="#dce7f1" fill="none"/><path d="M10 24 L48 32 L86 28 L124 49 L162 43 L200 57 L240 60" stroke="#0ca77a" stroke-width="3" fill="none"/></svg><p>Lower is better. Stress Reducer earns 40 SP weekly when the score improves at least 15% and both HRP metrics do not worsen, subject to validation.</p><button data-go="engine">Open points calculator →</button></div></div>
 <div id="phone-quests" class="phone-screen" hidden><div class="phone-card"><h3>My safety quests</h3><div id="phoneRules"></div><button class="full" data-go="quests">Personalised coaching →</button></div></div>
-<div id="phone-rewards" class="phone-screen" hidden><div class="phone-card"><h3>Reward wallet</h3><div class="big wallet">—</div><small class="worth">—</small><div id="phoneRewards" class="reward-grid"></div><p class="muted">Sample rewards only. No actual voucher is issued.</p><button class="full" data-go="shop">Full marketplace →</button></div><div class="phone-card"><h3>Reward providers</h3><div id="phoneProviders"></div><small>Documentation only · not connected</small></div></div>
+<div id="phone-rewards" class="phone-screen" hidden><div class="phone-card"><h3>Reward wallet</h3><div class="big wallet">—</div><small class="worth">—</small><label for="phoneCountry">Market</label><select id="phoneCountry"><option value="SG">Singapore</option><option value="US">United States</option><option value="GB">United Kingdom</option><option value="AE">UAE</option><option value="IN">India</option></select><p id="phoneCatalogueStatus" class="muted" role="status"></p><div id="phoneRewards" class="reward-grid"></div><p class="muted">Sample rewards can be simulated. Sandbox products are preview-only.</p><button class="full" data-go="shop">Full marketplace →</button></div><div class="phone-card"><h3>Reward providers</h3><div id="phoneProviders"></div><small>Read-only sandbox connections · no purchases</small></div></div>
 <div id="phone-history" class="phone-screen" hidden><div class="phone-card"><h3>My points history</h3><div id="phoneHistory"></div><button data-go="ledger">Full statement →</button></div></div>
 <div class="phone-nav"><button data-phone="home" aria-pressed="true">Home</button><button data-phone="quests" aria-pressed="false">Quests</button><button data-phone="rewards" aria-pressed="false">Rewards</button><button data-phone="history" aria-pressed="false">History</button></div><p class="muted" style="font-size:10px">*Synthetic worker analytics. No medical or injury-risk claim.</p></aside></div></section>
 <section id="quests" hidden>
@@ -202,7 +202,7 @@ body{background:radial-gradient(ellipse at 100% 0,#a9d9f3 0,transparent 35%),lin
 
 <section id="shop" hidden>
   <h1>Rewards marketplace</h1>
-  <p class="muted">Illustrative catalogue only. No real orders, no external funds.</p>
+  <p class="muted">Browse sandbox catalogues or clearly labelled sample rewards. No real orders or external funds.</p>
   <div class="card">
     <small>Spendable balance</small>
     <div class="big wallet">—</div>
@@ -216,7 +216,7 @@ body{background:radial-gradient(ellipse at 100% 0,#a9d9f3 0,transparent 35%),lin
       <option value="IN">India · INR</option>
     </select>
   </div>
-  <div class="grid" id="vouchers"></div>
+  <div class="market-controls"><label for="rewardFilter">Category</label><select id="rewardFilter"><option value="All">All</option><option>Groceries</option><option>Dining</option><option>Transport</option><option>Shopping</option><option>Entertainment</option><option>Gift cards</option></select><label for="rewardSort">Sort</label><select id="rewardSort"><option value="default">Featured</option><option value="low">Lowest points</option><option value="high">Highest points</option></select></div><p id="catalogueStatus" class="muted" role="status">Loading catalogue…</p><div class="grid" id="vouchers"></div>
   <div class="card">
     <h2>Demo redemptions</h2>
     <div id="history">No rewards redeemed yet.</div>
@@ -502,6 +502,29 @@ const markets = { SG: ['S$', 5], US: ['US$', 5], GB: ['£', 5], AE: ['AED ', 20]
 const rewardNames = ['Groceries', 'Mobile top-up', 'Shopping', 'Dining', 'Retail'];
 const REDEEM_SP = 1000;
 
+let catalogue=null, visibleProducts=[], catalogueSequence=0;
+const statusNames={credentials_required:'Credentials required',sandbox_catalogue:'Sandbox catalogue loaded',sandbox_unavailable:'Sandbox unavailable',onboarding_required:'Onboarding required'};
+async function loadCatalogue(){
+ const seq=++catalogueSequence, country=$('country').value;
+ catalogue=null;renderCatalogue();
+ try{const result=await api('/api/catalogue?country='+encodeURIComponent(country));if(seq!==catalogueSequence)return;catalogue=result;}
+ catch{if(seq!==catalogueSequence)return;catalogue={products:[],providers:[],error:true};}
+ renderCatalogue();
+}
+function renderCatalogue(){
+ const status=!catalogue?'Loading catalogue…':catalogue.error?'Catalogue unavailable. Try changing market.':catalogue.sampleFallback?'Illustrative brands · availability unverified':'Provider sandbox catalogue · preview only';
+ $('catalogueStatus').textContent=status;$('phoneCatalogueStatus').textContent=status;
+ visibleProducts=(catalogue?.products||[]).filter(p=>$('rewardFilter').value==='All'||p.category===$('rewardFilter').value);
+ const sort=$('rewardSort').value;if(sort!=='default')visibleProducts.sort((a,b)=>a.points==null?1:b.points==null?-1:sort==='low'?a.points-b.points:b.points-a.points);
+ const card=(p,i)=>'<article class="reward-card"><div class="reward-logo">'+(p.image?'<img loading="lazy" referrerpolicy="no-referrer" alt="'+esc(p.name)+'" src="'+esc(p.image)+'">':'<strong>'+esc(p.name)+'</strong>')+'</div><small>'+esc(p.name)+'</small><b>'+ (p.amount==null?'Denomination pending':esc(p.currency)+' '+esc(p.amount)+' voucher')+'</b><small>'+esc(p.provider||'Illustrative brand')+'</small><span class="reward-point">'+(p.points==null?'Pricing pending':fmt(p.points)+' SP')+'</span><button class="primary" data-catalogue-index="'+i+'" '+(p.source!=='sample'||!wallet||wallet.spendable<p.points?'disabled':'')+'>'+(p.source==='sample'?'Simulate redemption':'Sandbox preview')+'</button></article>';
+ const html=visibleProducts.map(card).join('')||'<p class="muted">'+(catalogue?'No matching rewards.':'Loading…')+'</p>';
+ $('vouchers').innerHTML=html;$('phoneRewards').innerHTML=html;
+ document.querySelectorAll('[data-catalogue-index]').forEach(b=>b.onclick=()=>askRedeem(+b.dataset.catalogueIndex));
+ document.querySelectorAll('.reward-logo img').forEach(img=>img.onerror=()=>{const t=document.createElement('strong');t.textContent=img.alt;img.replaceWith(t);});
+ if(catalogue?.providers?.length)$('providerlist').innerHTML=providers.map(p=>{const s=catalogue.providers.find(x=>x.name===p[0]);return '<article class="card"><span class="badge">'+esc(statusNames[s?.state]||'Not connected')+'</span><h2>'+esc(p[0])+'</h2><p>'+esc(p[2])+'</p><a href="'+esc(p[1])+'" target="_blank" rel="noopener">Documentation</a></article>';}).join('');
+}
+$('phoneCountry').onchange=()=>{$('country').value=$('phoneCountry').value;loadCatalogue();};
+$('rewardFilter').onchange=renderCatalogue;$('rewardSort').onchange=renderCatalogue;
 function rows(target, items, className) {
   $(target).replaceChildren(...items.map((x) => {
     const p = document.createElement('p');
@@ -520,14 +543,7 @@ function renderWallet() {
   if ($('levelpreview').value === 'current') renderShells(w.lifetime);
   $('lifetimenote').textContent = fmt(w.lifetime) + ' lifetime SP · ' + fmt(w.monthly) + ' earned this month (' +
     fmt(w.remaining) + ' left under the 4,610 SP cap) · redeeming never lowers your level.';
-  const [symbol, value] = markets[$('country').value];
-  $('vouchers').innerHTML = rewardNames.map((n, i) =>
-    '<article class="card"><div class="voucher"><small>Sample reward</small><br><b>' + symbol + value + '</b></div><h2>' + n +
-    '</h2><p class="muted">' + providers[i][0] + ' · availability unverified</p><button class="primary" data-redeem="' + i + '" ' +
-    (w.spendable < REDEEM_SP ? 'disabled' : '') + '>Redeem ' + fmt(REDEEM_SP) + ' SP</button></article>').join('');
-  document.querySelectorAll('[data-redeem]').forEach((b) => (b.onclick = () => askRedeem(+b.dataset.redeem)));
-  $('phoneRewards').innerHTML=rewardNames.map((n,i)=>'<button data-phone-redeem="'+i+'" '+(w.spendable<REDEEM_SP?'disabled':'')+'>'+n+'<br>'+fmt(REDEEM_SP)+' SP</button>').join('');
-  document.querySelectorAll('[data-phone-redeem]').forEach(b=>b.onclick=()=>askRedeem(+b.dataset.phoneRedeem));
+  renderCatalogue();
   rows('phoneHistory',w.statement.slice(-5).reverse().map(x=>x.type==='award'?'+'+fmt(x.awarded)+' SP · '+x.assessment:'−'+fmt(x.points)+' SP · '+x.label),'line');
   const spent = w.statement.filter((x) => x.type === 'redeem');
   rows('history', spent.length ? spent.map((x) => '−' + fmt(x.points) + ' SP · ' + x.label) : ['No rewards redeemed yet.']);
@@ -550,9 +566,10 @@ async function loadWallet() {
 // In-page confirm step (window.confirm is blocked in some embedded views).
 let pending = null;
 function askRedeem(i) {
-  const [symbol, value] = markets[$('country').value];
-  pending = { request: requestId(), points: REDEEM_SP, label: rewardNames[i] + ' · ' + symbol + value + ' · simulated' };
-  $('confirmtext').textContent = 'Spend ' + fmt(REDEEM_SP) + ' SP on a ' + rewardNames[i] + ' reward (' + symbol + value + ')?';
+  const p=visibleProducts[i];
+  if(!p||p.source!=='sample'||!wallet||wallet.spendable<p.points)return;
+  pending={request:requestId(),points:p.points,label:p.name+' · '+p.currency+' '+p.amount+' · simulated'};
+  $('confirmtext').textContent='Spend '+fmt(p.points)+' SP on '+p.name+' ('+p.currency+' '+p.amount+')? Demo only.';
   $('confirm').showModal();
 }
 $('confirmno').onclick = () => { pending = null; $('confirm').close(); };
@@ -571,7 +588,7 @@ $('confirmyes').onclick = async () => {
 function alertBox(msg) {
   $('history').prepend(Object.assign(document.createElement('p'), { className: 'red', textContent: msg }));
 }
-$('country').onchange = renderWallet;
+$('country').onchange = ()=>{ $('phoneCountry').value=$('country').value; loadCatalogue(); };
 $('reset').onclick = async () => {
   try { wallet = await api('/api/reset', {}); } catch {}
   renderWallet();
@@ -714,6 +731,7 @@ $('phoneShell').innerHTML=emblem(0,0,true);
 renderShells(0);
 budget();
 loadWallet();
+loadCatalogue();
 loadBoard().catch(()=>{});
 calculate();
 // Deep links such as /#board open that tab.
