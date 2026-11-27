@@ -7,6 +7,7 @@ const http = require("node:http"),
 const { score, policy, levelFor } = require("./points-engine");
 const { createDemoLedger } = require("./demo-ledger");
 const { leaderboard } = require("./demo-data");
+const { createCatalogue } = require("./reward-catalogue");
 
 const DEMO_WORKER = "demo-courier-a";
 const OPENING_AWARD = 2400;
@@ -46,6 +47,7 @@ async function readJson(req) {
 }
 
 function createServer() {
+  const catalogue = createCatalogue();
   let ledger = freshLedger();
   let scored = new Map(); // assessment -> { inputs, entry }: each week is scored once
   return http.createServer(async (req, res) => {
@@ -60,6 +62,7 @@ function createServer() {
         return json(200, { status: "ok", mode: "demo", purchases: false, policy: policy.version });
       if (url.pathname === "/api/wallet" && req.method === "GET") return json(200, wallet(ledger));
       if (url.pathname === "/api/leaderboard" && req.method === "GET") return json(200, leaderboard());
+      if (url.pathname === "/api/catalogue" && req.method === "GET") return json(200, await catalogue(url.searchParams.get("country") || "SG"));
       // Preview only: scores whatever the lab sends and writes nothing.
       if (post("/api/score")) return json(200, score(await readJson(req)));
       // Score a week and post it to the ledger. The level and month-to-date total come from the
